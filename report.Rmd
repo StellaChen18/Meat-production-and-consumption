@@ -183,7 +183,7 @@ Based on this finding, we may conclude that the level of urbanization of the cou
 
 \clearpage
 
-\section*{Country Belgium and Turkey}
+\section*{Per capita meat consumption}
 
 ```{r read-data, echo = FALSE}
 # Read data
