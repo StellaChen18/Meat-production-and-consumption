@@ -36,6 +36,8 @@ output:
     number_sections: yes
     citation_package: biblatex
     toc: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r , echo = FALSE, message = FALSE, warning = FALSE}
@@ -46,6 +48,8 @@ library(readr)
 library(kableExtra)
 library(bookdown)
 library(gridExtra)
+library(viridis)
+library(scales)
 ```
 
 # Data set introduction
@@ -69,33 +73,46 @@ library(gridExtra)
 
 \clearpage
 
-\section*{Country Ethiopia and Italy}
+\section*{Brief about Meat Production}
 
-\subsection*{Exploratory data analysis}
+- What's the status of meat production across the world?
 
-```{r read-data2, echo = FALSE , message = FALSE, warning = FALSE}
+- How did the CO2 emissions per capita of the two countries develop  from 1960 to 2020?
 
-raw <- read_csv(file = "Data/global-meat-production.csv")
+\subsection*{Research Question}
+
+```{r load-data, echo = FALSE , message = FALSE, warning = FALSE}
+GD <- read_csv(file = "Data/global-meat-production.csv")
+MT <- read_csv(file = "Data/global-meat-production-by-livestock-type.csv")
 ```
 
-```{r tab2, echo = FALSE , message = FALSE, warning = FALSE}
-comparison <- raw %>%
-  dplyr::filter(Country_Name %in% c("Ethiopia","Italy")) %>%
-         group_by(Country_Name, Year) %>%
-         rename(Country = Country_Name) %>% 
-         summarize_at(vars(Urban_population), list(sum), na.rm = TRUE)
+## Q1
+```{r production, echo = FALSE , message = FALSE, warning = FALSE}
+production <- GD %>%
+  select(-Code) %>% 
+  filter(Entity %in% c("Asia",
+                       "Europe",
+                       "Northern America",
+                       "South America",
+                       "Central America",
+                       "Africa",
+                       "Oceania")) %>%
+    rename("Production"= "Livestock Primary - Meat, Total - 1765 - Production - 5510 - tonnes") %>%
+    group_by(Entity, Year)
 
-comparison_wide <- comparison %>% 
-  pivot_wider(names_from = Country,
-              values_from = Urban_population) %>% 
-  filter(Year >= 1999)  
-  
-  
-kable(comparison_wide, caption = "Urban population per year of Ethiopia and Italy from 1999-2018", booktabs = T) %>%
-kable_material(c("striped", "hover"), position = "center")
+plt_pd<- ggplot(production, aes(x= Year,
+                                y= Production, 
+                                fill= Entity)) + 
+    geom_area(alpha=0.6 , size=.5, colour="white")+
+    scale_fill_viridis(discrete = T) +
+    theme_minimal()+
+    ggtitle("Global meat production, 1961 to 2018")+
+    scale_y_continuous(labels = comma_format(big.mark = "."))
+
+ggplotly(plt_pd)
 ```
 
-Because the data is across over 40 years, which is a bit longer to present. So in Table \@ref(tab:tab2) we extract the urban population of two countries since 1999. And noticeably, the urban population of Ethiopia is lower than Italy throughout the whole period.
+Regionally, **Asia is the largest meat producer**, accounting for near 50  percent of total meat production. This regional distribution has changed significantly in recent decades. In 1961, Europe and North America were the dominant meat producers, however Asia only produced little portion. By 2013, Europe and North America’s share had fallen noticeably.
 
 ```{r fig2, echo = FALSE , message = FALSE, warning = FALSE, fig.cap = "Comparison of the urbanization development"}
 ET2 <- raw %>%
