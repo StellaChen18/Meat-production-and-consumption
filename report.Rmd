@@ -50,248 +50,108 @@ library(gridExtra)
 
 # Data set introduction
 
-At the World Bank, the Development Data Group coordinates statistical and data work and maintains a number of macro, financial and sector databases. The data set that we used was obtained from the World Bank database. This report explores the variation in data for six countries in different income groups by focusing on three variables of the data set: CO2 emissions (metric tons per capita), urban population and energy use (kg of oil equivalent per capita).
 
-The CO2 emissions refers to annual anthropogenic emissions from data on fossil fuel consumption and world cement manufacturing. 
-
-Urban population refers to people living in urban areas as defined by national statistical offices. 
-
-Total energy use includes energy usage from combustible renewable and waste - solid biomass and animal products, gas and liquid from biomass, and industrial and municipal waste. 
-
-More information available \href{https://data.worldbank.org/}{here}.
 
 # Research questions
 
-- For China and India, which country has more CO2 emissions per capita during 1960 to 2020?
 
-- How did the CO2 emissions per capita of China and India develop from 1960 to 2020?
 
-- How's the development of urbanization of the two selected countries of two types of income group:
-    
-    1. Ethiopia: Low income.
-    2. Italy: High income
-
-- Would the situation be similar with the other income group countries.
-    
-    Is the situation similar with the status of observation from last question.
-
-- Overall energy use kg of oil_equivalent per capita in Belgium and Turkey from 1960 to 2015.
-
-- The trend in energy use kg of oil_equivalent per capita of Belgium and Turkey from 1960 to 2015.
 
 \clearpage
 
 # Exploratory data analysis
 
-\section*{Country China and India}
+\section*{Global meat production -- Di Cui}
 
 ```{r read-data1, echo = FALSE, message = FALSE, warning = FALSE}
-data<- read.csv(here::here("Data/Assignment3_data.csv")) %>%
-  filter(Country_Name == "China" | Country_Name == "India")
+global_production <-read.csv(here::here("Data/global-meat-production.csv"))
+production <- read.csv(here::here("Data/meat-production-tonnes.csv"))
 ```
 
 \subsection*{Analysis} 
 
-**Q1:**
+**Q1: How does global meat production develop from 1961 to 2018?**
 
-```{r co2table, echo = FALSE, message = FALSE, warning = FALSE}
-data %>%
-  group_by(Country_Name) %>%
-  summarise(mean = mean(CO2_emissions_metric_tons_per_capita, na.rm = TRUE), 
-            median = median(CO2_emissions_metric_tons_per_capita, na.rm = TRUE)) %>%
-  knitr::kable(caption = "The mean and median of CO2 emissions(metric tones per capita) in China and India ")
+```{r tidy-data, echo = FALSE, message = FALSE, warning = FALSE}
+
+global_production <- global_production %>%
+  rename("meat_production" = "Livestock.Primary...Meat..Total...1765...Production...5510...tonnes") %>%
+  mutate(meat_production = round(meat_production/1000000, digits = 2)) %>%
+  filter(Entity %in% c("Oceania", "Africa", "Central America", "South America", "Northern America", "Europe", "Asia")) 
+
+
+df <- global_production %>%
+  group_by(Entity) %>%
+  mutate(meat_sum = sum(meat_production)) %>%
+  ungroup() %>%
+  arrange(meat_sum) 
+
+df <- df %>%
+  mutate(Entity = factor(Entity, unique(Entity))) %>%
+  group_by(Year) %>%
+  mutate(total = sum(meat_production))
+
+ 
 ```
 
-In table\@ref(tab:co2table), we observe the mean and median of CO2 emissions per capita in China are all higher than the mean and median in India. The mean and median in China are all over 2 metric tons. However, the mean and median in India are all under 1 metric tons.
+```{r continent-figure, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Global meat production from 1961 to 2018"}
+ggplot(df, aes(x = Year, y = meat_production, color = Entity))+
+  geom_line()+
+  scale_fill_brewer(palette = "Set3")+
+  scale_x_continuous(breaks = c(1961,1970,1980, 1990, 2000, 2010,2018))+
+  scale_y_continuous(breaks = c(0, 10, 50, 100, 150))+
+  ylab("livestock meat production (million tonnes)")+
+  theme_bw()
+```  
 
-**Q2:**
-
-```{r co2trend, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="The CO2 emissions(metric tones per capita) in China and India"}
-
-data %>%
-  ggplot(aes(x = Year, y = CO2_emissions_metric_tons_per_capita, color = Country_Name)) +
-  geom_line(aes(group = Country_Name))+
-  scale_x_continuous(breaks = seq(1960,2020,10))+
-  labs(y = "CO2 emissions(metric tones per capita)", color = "Country Name")+
-  facet_wrap(~IncomeGroup, ncol = 1, scales = "free_y")
-
-  
-```
-
-Figure\@ref(fig:co2trend) shows the uptrend development of CO2 emissions per capita in China and India. In China, the number of CO2 emissions per capita decreased after 1960, but the number has increased from 1970 and raised sharply from 2000, and the number has arrived at around 6.5 metric tons in 2010. In India, although the number increased all the time, the number was always under 2 metric tons.
+From Figure\@ref(fig:continent-figure), we can see all continents show an uptrend. In particular, Asia production increased from under 10 million tonnes to around 150 million tonnes, and produced more meat than Europe in 1992, and become the largest meat production continent. And Europe shows a fluctuating growth, while another continents show steady growth.
 
 \clearpage
 
-\section*{Country Ethiopia and Italy}
+**Q2:  How do the Top six countries of meat production develop from 1961 to 2018?**
 
-\subsection*{Exploratory data analysis}
+```{r tidy-data2, echo = FALSE, message = FALSE, warning = FALSE}
 
-```{r read-data2, echo = FALSE , message = FALSE, warning = FALSE}
+production <- production %>%
+   rename("meat_production" = "Livestock.Primary...Meat..Total...1765...Production...5510...tonnes") %>%
+  mutate(meat_production = round(meat_production/1000000, digits = 2)) 
 
-raw <- read_csv(file = "Data/Assignment3_data.csv")
+df2 <- production %>%
+  group_by(Entity) %>%
+  mutate(meat_sum = sum(meat_production)) %>%
+  ungroup() %>%
+  arrange(-meat_sum) 
+
+df2 <- df2 %>%
+  filter(Code != "" &
+        Code %in% c("CHN", "USA", "BRA", "DEU", "FRA", "ARG"))
+ 
+
 ```
 
-```{r tab2, echo = FALSE , message = FALSE, warning = FALSE}
-comparison <- raw %>%
-  dplyr::filter(Country_Name %in% c("Ethiopia","Italy")) %>%
-         group_by(Country_Name, Year) %>%
-         rename(Country = Country_Name) %>% 
-         summarize_at(vars(Urban_population), list(sum), na.rm = TRUE)
 
-comparison_wide <- comparison %>% 
-  pivot_wider(names_from = Country,
-              values_from = Urban_population) %>% 
-  filter(Year >= 1999)  
-  
-  
-kable(comparison_wide, caption = "Urban population per year of Ethiopia and Italy from 1999-2018", booktabs = T) %>%
-kable_material(c("striped", "hover"), position = "center")
-```
+```{r country, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Top six countries' meat production from 1961 to 2018"}
 
-Because the data is across over 40 years, which is a bit longer to present. So in Table \@ref(tab:tab2) we extract the urban population of two countries since 1999. And noticeably, the urban population of Ethiopia is lower than Italy throughout the whole period.
-
-```{r fig2, echo = FALSE , message = FALSE, warning = FALSE, fig.cap = "Comparison of the urbanization development"}
-ET2 <- raw %>%
-          dplyr::filter(Country_Name %in% c("Ethiopia",
-                                            "Italy")) %>%
-                 rename(Country = Country_Name) %>%
-ggplot(aes(x = Year,
-           y = Urban_population,
-           fill = Country) ) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  scale_fill_viridis_d(direction = 1) +
+ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
+  geom_line()+
+  scale_fill_brewer(palette = "Set3")+
+  scale_x_continuous(breaks = c(1961,1970,1980, 1990, 2000, 2010,2018))+
+  ylab("Top 6 countries of livestock meat production (million tonnes)")+
   theme_bw()
 
-ET3 <- raw %>%
-          dplyr::filter(IncomeGroup %in% c("Low income",
-                                           "High income")) %>%
-                 
-ggplot(aes(x = Year,
-           y = Urban_population,
-           fill = IncomeGroup) ) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  scale_fill_viridis_d(direction = -1) +
-  theme_bw()
-
-grid.arrange(ET2, ET3, nrow = 2)
-```
-
-
-In figure \@ref(fig:fig2) we observe the level of urbanization in Ethiopia is still strong, but on the other hand, Italy is quite stable. And we observe the similar trend in the plot of income group.
-
-Based on this finding, we may conclude that the level of urbanization of the country may be significantly affected by its development of economic and its state income.
-
-\clearpage
-
-\section*{Country Belgium and Turkey}
-
-```{r read-data, echo = FALSE}
-# Read data
-energyuse <- read.csv("Data/Assignment3_data.csv") %>%
-             filter(Country_Name %in% c("Belgium", "Turkey")) %>%
-             filter(complete.cases(Energy_use_kg_of_oil_equivalent_per_capita)) %>%
-             select(-CO2_emissions_metric_tons_per_capita, -Urban_population)
-
-```
-
-\subsection*{Analysis}
-
-**The total energy use of Belgium and Turkey**
-
-From 1960 to 2015, the total energy use of Belgium is 258677.63 kg of oil_equivalent per capita, while it is 51666.23 kg in Turkey. See Table \@ref(tab:energyuse-Tot).
-
-```{r energyuse-Tot, echo = FALSE}
-energyuse_Tot <- energyuse %>% 
-                 group_by(Country_Name) %>%
-                 summarise(Total_energy_use = sum(Energy_use_kg_of_oil_equivalent_per_capita))
-knitr::kable(energyuse_Tot, 
-             caption = "Total energy use of Belgium and Turkey",
-             digits = 2)
-```
-
-**The trend**
-
-Figure \@ref(fig:trend) shows the trend of the energy use kg of oil_equivalent per capita in Belgium and Turkey. In general, energy use kg of oil_equivalent per capita in both countries shows an upward trend over the 55-year period, but Belgium's energy use is much higher than Turkey's. Belgium shows a fluctuating upward trend, with a larger increase than Turkey, while Turkey shows a steady upward trend.
-
-```{r trend, fig.cap= "Energy use of Belgium and Turkey", echo=FALSE}
-ggplot(energyuse, aes(x = Year, 
-                          y = Energy_use_kg_of_oil_equivalent_per_capita,
-                      color = Country_Name)) +
-geom_line() + theme() + 
-  scale_x_continuous(
-    breaks = seq(min(energyuse$Year),
-                 max(energyuse$Year), by=10)) +
-  facet_wrap(~IncomeGroup, ncol = 1)
-```
-
-# Visualization of urbanization, energy consumption, and CO2 emissions with different income level countries
-
-```{r co2-conclusion, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="The CO2 emissions(metric tones per capita) in six countries"}
-co2_conclusion <- read.csv(here::here("Data/Assignment3_data.csv")) %>%
-  filter(Country_Name == "China" | Country_Name == "India" |
-          Country_Name == "Belgium" | Country_Name == "Turkey" |
-          Country_Name == "Ethiopia" | Country_Name == "Italy")
-
-co2_conclusion %>%
-  ggplot(aes(x = Year, y = CO2_emissions_metric_tons_per_capita, color = Country_Name)) +
-  geom_line(aes(group = Country_Name))+
-  scale_x_continuous(breaks = seq(1960,2020,10))+
-  labs(y = "CO2 emissions(metric tones per capita)", color = "Country Name")+
-    facet_wrap(~IncomeGroup, ncol = 1, scales = "free_y")
-
-```
-
-```{r urbanization, echo = FALSE, fig.align = "center", fig.cap = "The urbanization development of six countries"}
-
-All <- raw %>%
-          dplyr::filter(Country_Name %in% c("Ethiopia",
-                                            "Italy",
-                                            "Belgium",
-                                            "Turkey",
-                                            "China",
-                                            "India")) %>%
-                 rename(Country = Country_Name) %>%
   
-  ggplot(aes(x = Year, 
-             y = Urban_population,
-             color = Country) ) +
-  geom_line()  +
-  facet_wrap(~IncomeGroup, ncol = 1, scales = "free_y") 
-
-All
 ```
 
-```{r energy-use, echo = FALSE, fig.cap= "Energy use kg of oil_equivalent per capita in six counties"}
-energy <- read.csv("Data/Assignment3_data.csv") %>%
-             filter(Country_Name %in% c("Belgium", "Turkey", "Ethiopia", "Italy", "China", "India")) %>%
-             filter(complete.cases(Energy_use_kg_of_oil_equivalent_per_capita)) %>%
-             select(-CO2_emissions_metric_tons_per_capita, -Urban_population)
-
-ggplot(energy, aes(x = Year, 
-                          y = Energy_use_kg_of_oil_equivalent_per_capita,
-                      color = Country_Name)) +
-geom_line() + theme() + 
-  scale_x_continuous(
-    breaks = seq(min(energyuse$Year),
-                 max(energyuse$Year), by=10)) +
-  facet_wrap(~IncomeGroup, ncol = 1, scales = "free_y")
-
-```
+From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time. 
 
 \clearpage
 
-# Conclusion
 
-To conclude, the graphs illustrate that the three indicators varies accordingly for different classes of income groups,
 
-- About the CO2 emissions, almost all income groups show an uptrend development except for the high income group, which develops steadily. And the number of CO2 emissions in high-income and upper-middle-income countries is always higher than in the other two groups, which is higher than three metric tons in the recent 30 years. However, in other income groups, the number is under two metric tons, especially in the low-income group, the number is under 0.5 metric tons. See Figure \@ref(fig:co2-conclusion).
 
-- From Figure \@ref(fig:urbanization), we can see the urban population of our selected countries all present a steady increasing status. With this kind of explosive growth of cities globally signifies the demographic transition from rural to urban, and is associated with state’s economic activity shifts from an agriculture-based economy to mass industry, technology, and service, which improve the country’s income status.
-
-- Figure \@ref(fig:energy-use) illustrates that energy use has been growing rapidly in low- and middle-income economies, but high-income economies still use almost five times as much energy on a per capita basis.
 
 \section*{Citation}
-The data set is cited from @Worldbank.
+The data set is cited from @meatproduction.
 
 Analysis of the data is done using the following packages:
 
@@ -299,6 +159,6 @@ bookdown @bookdown1, @bookdown2,
 
 tidyverse @tidyverse,
 
-readr @readr,
+readr @readr
 
-kableExtra @kableExtra.
+
