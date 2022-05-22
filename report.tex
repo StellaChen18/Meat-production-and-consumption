@@ -21,7 +21,6 @@
 \PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
 \usepackage[unicode=true]{hyperref}
 \hypersetup{
-            pdftitle={Urbanization, energy consumption, and CO2 emissions with different income level countries},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -62,7 +61,6 @@
 \def\fps@table{htbp}
 \makeatother
 
-\title{Urbanization, energy consumption, and CO2 emissions with different income level countries}
 
 %% MONASH STUFF
 
@@ -218,7 +216,7 @@
 \def\telephone#1{\gdef\@telephone{#1}}
 \def\email#1{\gdef\@email{#1}}
 \makeatother
-  \organization{World Bank}
+  \organization{}
 
   \def\name{TGIF \newline Di Cui \&\newline Guanru Chen \&\newline Yunzhi Chen}
 
@@ -306,215 +304,172 @@
 
 
 \begin{document}
-\titlepage
 
 \hypertarget{data-set-introduction}{%
 \section{Data set introduction}\label{data-set-introduction}}
 
-At the World Bank, the Development Data Group coordinates statistical and data work and maintains a number of macro, financial and sector databases. The data set that we used was obtained from the World Bank database. This report explores the variation in data for six countries in different income groups by focusing on three variables of the data set: CO2 emissions (metric tons per capita), urban population and energy use (kg of oil equivalent per capita).
-
-The CO2 emissions refers to annual anthropogenic emissions from data on fossil fuel consumption and world cement manufacturing.
-
-Urban population refers to people living in urban areas as defined by national statistical offices.
-
-Total energy use includes energy usage from combustible renewable and waste - solid biomass and animal products, gas and liquid from biomass, and industrial and municipal waste.
-
-More information available \href{https://data.worldbank.org/}{here}.
-
 \hypertarget{research-questions}{%
 \section{Research questions}\label{research-questions}}
-
-\begin{itemize}
-\item
-  For China and India, which country has more CO2 emissions per capita during 1960 to 2020?
-\item
-  How did the CO2 emissions per capita of China and India develop from 1960 to 2020?
-\item
-  How's the development of urbanization of the two selected countries of two types of income group:
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Ethiopia: Low income.
-  \item
-    Italy: High income
-  \end{enumerate}
-\item
-  Would the situation be similar with the other income group countries.
-
-  Is the situation similar with the status of observation from last question.
-\item
-  Overall energy use kg of oil\_equivalent per capita in Belgium and Turkey from 1960 to 2015.
-\item
-  The trend in energy use kg of oil\_equivalent per capita of Belgium and Turkey from 1960 to 2015.
-\end{itemize}
 
 \clearpage
 
 \hypertarget{exploratory-data-analysis}{%
 \section{Exploratory data analysis}\label{exploratory-data-analysis}}
 
-\section*{Country China and India}
+\section*{}
 
 \subsection*{Analysis}
 
-\textbf{Q1:}
+\clearpage
 
-\begin{table}
+\section*{Brief about Meat Production}
 
-\caption{\label{tab:co2table}The mean and median of CO2 emissions(metric tones per capita) in China and India }
-\centering
-\begin{tabular}[t]{l|r|r}
-\hline
-Country\_Name & mean & median\\
-\hline
-China & 2.5792506 & 2.0384107\\
-\hline
-India & 0.7221454 & 0.5959397\\
-\hline
-\end{tabular}
-\end{table}
+\begin{itemize}
+\item
+  What's the production distribution of different livestock types across the world?
+\item
+  Which countries are main production country for?
+\end{itemize}
 
-In table\ref{tab:co2table}, we observe the mean and median of CO2 emissions per capita in China are all higher than the mean and median in India. The mean and median in China are all over 2 metric tons. However, the mean and median in India are all under 1 metric tons.
+\subsection*{Research Question}
 
-\textbf{Q2:}
+\hypertarget{q1}{%
+\subsection{Q1}\label{q1}}
 
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/co2trend-1.pdf}
-\caption{\label{fig:co2trend}The CO2 emissions(metric tones per capita) in China and India}
-\end{figure}
+\hypertarget{q1-1}{%
+\subsection{Q1}\label{q1-1}}
 
-Figure\ref{fig:co2trend} shows the uptrend development of CO2 emissions per capita in China and India. In China, the number of CO2 emissions per capita decreased after 1960, but the number has increased from 1970 and raised sharply from 2000, and the number has arrived at around 6.5 metric tons in 2010. In India, although the number increased all the time, the number was always under 2 metric tons.
+\includegraphics{report_files/figure-latex/productiontype-1.pdf} \includegraphics{report_files/figure-latex/productiontype-2.pdf}
+
+In figure \ref{fig:fig1}, we see that the dominant livestock types are poultry, cattle (which includes beef and buffalo meat), pig, and sheep \& goat to a lesser extent at global level.
+
+Although production of all major meat types have been increasing in absolute terms, in relative terms the share of global meat types have changed significantly over the last 50 years. In 1961, poultry meat accounted for small portion; by 2013 its share has tripled. In comparison, beef and buffalo meat as a share of total meat production has nearly halved. And the Pigmeat's share has remained more constant.
 
 \clearpage
 
-\section*{Country Ethiopia and Italy}
-
-\subsection*{Exploratory data analysis}
+\hypertarget{q2}{%
+\subsection{Q2}\label{q2}}
 
 \begin{table}
 
-\caption{\label{tab:tab2}Urban population per year of Ethiopia and Italy from 1999-2018}
+\caption{\label{tab:cattle}Beef and buffalo (cattle) meat production, 1961-2018}
 \centering
-\begin{tabular}[t]{rrr}
+\begin{tabular}[t]{lr}
 \toprule
-Year & Ethiopia & Italy\\
+Entity & Total\\
 \midrule
-1999 & 9363839 & 38226137\\
-2000 & 9761536 & 38277624\\
-2001 & 10174157 & 38333314\\
-2002 & 10604081 & 38447500\\
-2003 & 11049316 & 38686985\\
+World & 3048298992\\
+Americas & 1355773399\\
+Europe & 808420934\\
+Northern America & 687736109\\
+United States & 627725508\\
 \addlinespace
-2004 & 11510093 & 39006818\\
-2005 & 11986371 & 39267369\\
-2006 & 12478999 & 39454178\\
-2007 & 13001478 & 39722857\\
-2008 & 13689470 & 40056298\\
+South America & 568546284\\
+Asia & 527122399\\
+European Union & 494528637\\
+Eastern Europe & 340150047\\
+Low Income Food Deficit Countries & 296902586\\
 \addlinespace
-2009 & 14413055 & 40308358\\
-2010 & 15178365 & 40502481\\
-2011 & 15986316 & 40641670\\
-2012 & 16839218 & 40894259\\
-2013 & 17717910 & 41548775\\
+Net Food Importing Developing Countries & 291245656\\
+Brazil & 289011599\\
+Europe, Western & 243825958\\
+Africa & 227535352\\
+Southern Asia & 195483148\\
 \addlinespace
-2014 & 18635946 & 42109853\\
-2015 & 19590313 & 42247229\\
-2016 & 20581872 & 42351339\\
-2017 & 21609845 & 42462869\\
-2018 & 22678295 & 42566587\\
+USSR & 192970000\\
+Eastern Asia & 192052963\\
+Argentina & 155119322\\
+China & 151848982\\
+Least Developed Countries & 140568636\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Because the data is across over 40 years, which is a bit longer to present. So in Table \ref{tab:tab2} we extract the urban population of two countries since 1999. And noticeably, the urban population of Ethiopia is lower than Italy throughout the whole period.
-
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/fig2-1.pdf}
-\caption{\label{fig:fig2}Comparison of the urbanization development}
-\end{figure}
-
-In figure \ref{fig:fig2} we observe the level of urbanization in Ethiopia is still strong, but on the other hand, Italy is quite stable. And we observe the similar trend in the plot of income group.
-
-Based on this finding, we may conclude that the level of urbanization of the country may be significantly affected by its development of economic and its state income.
-
-\clearpage
-
-\section*{Country Belgium and Turkey}
-
-\subsection*{Analysis}
-
-\textbf{The total energy use of Belgium and Turkey}
-
-From 1960 to 2015, the total energy use of Belgium is 258677.63 kg of oil\_equivalent per capita, while it is 51666.23 kg in Turkey. See Table \ref{tab:energyuse-Tot}.
+\includegraphics{report_files/figure-latex/cattle-1.pdf}
 
 \begin{table}
 
-\caption{\label{tab:energyuse-Tot}Total energy use of Belgium and Turkey}
+\caption{\label{tab:poultry}Poultry meat production, 1961-2018}
 \centering
-\begin{tabular}[t]{l|r}
-\hline
-Country\_Name & Total\_energy\_use\\
-\hline
-Belgium & 258677.63\\
-\hline
-Turkey & 51666.23\\
-\hline
+\begin{tabular}[t]{lr}
+\toprule
+Entity & Total\\
+\midrule
+World & 3048298992\\
+Americas & 1355773399\\
+Europe & 808420934\\
+Northern America & 687736109\\
+United States & 627725508\\
+\addlinespace
+South America & 568546284\\
+Asia & 527122399\\
+European Union & 494528637\\
+Eastern Europe & 340150047\\
+Low Income Food Deficit Countries & 296902586\\
+\addlinespace
+Net Food Importing Developing Countries & 291245656\\
+Brazil & 289011599\\
+Europe, Western & 243825958\\
+Africa & 227535352\\
+Southern Asia & 195483148\\
+\addlinespace
+USSR & 192970000\\
+Eastern Asia & 192052963\\
+Argentina & 155119322\\
+China & 151848982\\
+Least Developed Countries & 140568636\\
+\bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{The trend}
+\includegraphics{report_files/figure-latex/poultry-1.pdf}
 
-Figure \ref{fig:trend} shows the trend of the energy use kg of oil\_equivalent per capita in Belgium and Turkey. In general, energy use kg of oil\_equivalent per capita in both countries shows an upward trend over the 55-year period, but Belgium's energy use is much higher than Turkey's. Belgium shows a fluctuating upward trend, with a larger increase than Turkey, while Turkey shows a steady upward trend.
+\begin{table}
 
-\begin{figure}
+\caption{\label{tab:pig}Pig meat production, 1961-2018}
 \centering
-\includegraphics{report_files/figure-latex/trend-1.pdf}
-\caption{\label{fig:trend}Energy use of Belgium and Turkey}
-\end{figure}
+\begin{tabular}[t]{lr}
+\toprule
+Entity & Total\\
+\midrule
+World & 4097384349\\
+Asia & 1898603248\\
+Eastern Asia & 1669827471\\
+China & 1560964337\\
+Europe & 1381507340\\
+\addlinespace
+European Union & 1058781657\\
+Americas & 757196334\\
+Northern America & 523606187\\
+Europe, Western & 506076170\\
+Eastern Europe & 469050696\\
+\addlinespace
+United States & 450610222\\
+Germany & 243524535\\
+Southern Europe & 237607762\\
+South Eastern Asia & 201427149\\
+Northern Europe & 168772711\\
+\addlinespace
+South America & 161542187\\
+USSR & 158895200\\
+Low Income Food Deficit Countries & 122938347\\
+Spain & 112057292\\
+France & 107505681\\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\hypertarget{visualization-of-urbanization-energy-consumption-and-co2-emissions-with-different-income-level-countries}{%
-\section{Visualization of urbanization, energy consumption, and CO2 emissions with different income level countries}\label{visualization-of-urbanization-energy-consumption-and-co2-emissions-with-different-income-level-countries}}
+\includegraphics{report_files/figure-latex/pig-1.pdf}
 
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/co2-conclusion-1.pdf}
-\caption{\label{fig:co2-conclusion}The CO2 emissions(metric tones per capita) in six countries}
-\end{figure}
+In the table \ref{tab:cattle}, we see the global production of cattle (beef and buffalo) meat. From the country's perspective, The United States is the world's largest beef and buffalo meat producer. Other major producers are Brazil and China.
 
-\begin{figure}
+In the table \ref{tab:poultry}, we can see the production of poultry, like cattle production, the United States is still the world's largest producer. China and Brazil are also large poultry producers. Collectively, Europe is also a major poultry producer, just below the United States.
 
-{\centering \includegraphics{report_files/figure-latex/urbanization-1} 
-
-}
-
-\caption{The urbanization development of six countries}\label{fig:urbanization}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/energy-use-1.pdf}
-\caption{\label{fig:energy-use}Energy use kg of oil\_equivalent per capita in six counties}
-\end{figure}
-
+But for pigmeat production \ref{tab:pig}, China dominates global output, producing just short of half of total pigmeat. The other major producers include the United States, Germany.
 \clearpage
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
-
-To conclude, the graphs illustrate that the three indicators varies accordingly for different classes of income groups,
-
-\begin{itemize}
-\item
-  About the CO2 emissions, almost all income groups show an uptrend development except for the high income group, which develops steadily. And the number of CO2 emissions in high-income and upper-middle-income countries is always higher than in the other two groups, which is higher than three metric tons in the recent 30 years. However, in other income groups, the number is under two metric tons, especially in the low-income group, the number is under 0.5 metric tons. See Figure \ref{fig:co2-conclusion}.
-\item
-  From Figure \ref{fig:urbanization}, we can see the urban population of our selected countries all present a steady increasing status. With this kind of explosive growth of cities globally signifies the demographic transition from rural to urban, and is associated with state's economic activity shifts from an agriculture-based economy to mass industry, technology, and service, which improve the country's income status.
-\item
-  Figure \ref{fig:energy-use} illustrates that energy use has been growing rapidly in low- and middle-income economies, but high-income economies still use almost five times as much energy on a per capita basis.
-\end{itemize}
 
 \section*{Citation}
 
