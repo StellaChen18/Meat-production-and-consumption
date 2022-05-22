@@ -17,7 +17,7 @@
 
 The data set was obtained from the "Our World in Data" data base and contains the following variables regarding to meat production of the world:
 
-* Country
+* Entity
 
 * Year
 
@@ -25,4 +25,4 @@ The data set was obtained from the "Our World in Data" data base and contains th
 
 * Livestock types: including beef and buffalo, pigmeat, poultry, sheep and goat, et cetera.
 
-
+* Meat type consumption (kg/capita/year).
