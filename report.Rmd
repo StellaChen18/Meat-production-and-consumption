@@ -75,9 +75,9 @@ library(scales)
 
 \section*{Brief about Meat Production}
 
-- What's the status of meat production across the world?
+- What's the production distribution of different livestock types across the world?
 
-- How did the CO2 emissions per capita of the two countries develop  from 1960 to 2020?
+- Which countries are main production country for?
 
 \subsection*{Research Question}
 
@@ -107,50 +107,72 @@ plt_pd<- ggplot(production, aes(x= Year,
     scale_fill_viridis(discrete = T) +
     theme_minimal()+
     ggtitle("Global meat production, 1961 to 2018")+
-    scale_y_continuous(labels = comma_format(big.mark = "."))
+    scale_y_continuous(labels = comma_format(big.mark = ","))
 
 ggplotly(plt_pd)
 ```
 
-Regionally, **Asia is the largest meat producer**, accounting for near 50  percent of total meat production. This regional distribution has changed significantly in recent decades. In 1961, Europe and North America were the dominant meat producers, however Asia only produced little portion. By 2013, Europe and North America’s share had fallen noticeably.
 
-```{r fig2, echo = FALSE , message = FALSE, warning = FALSE, fig.cap = "Comparison of the urbanization development"}
-ET2 <- raw %>%
-          dplyr::filter(Country_Name %in% c("Ethiopia",
-                                            "Italy")) %>%
-                 rename(Country = Country_Name) %>%
-ggplot(aes(x = Year,
-           y = Urban_population,
-           fill = Country) ) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  scale_fill_viridis_d(direction = 1) +
-  theme_bw()
+## Q1
+```{r production_type, echo = FALSE , message = FALSE, warning = FALSE, fig.cap = "Comparison of the urbanization development"}
+pd_type <- MT %>%
+  select(-Code) %>% 
+  rename("Sheep & Goat"= "Livestock Primary - Sheep and Goat Meat - 1807 - Production - 5510 - tonnes",
+         "Beef & Buffalo"= "Livestock Primary - Beef and Buffalo Meat - 1806 - Production - 5510 - tonnes",
+         "Pig"= "Livestock Primary - Meat, pig - 1035 - Production - 5510 - tonnes",
+         "Wild Game"= "Livestock Primary - Meat, game - 1163 - Production - 5510 - tonnes",
+         "Duck"= "Livestock Primary - Meat, duck - 1069 - Production - 5510 - tonnes",
+         "Poltry"= "Livestock Primary - Meat, Poultry - 1808 - Production - 5510 - tonnes",
+         "Horse"= "Livestock Primary - Meat, horse - 1097 - Production - 5510 - tonnes",
+         "Camel"= "Livestock Primary - Meat, camel - 1127 - Production - 5510 - tonnes",
+         "Goose & Guinea fowl"= "Livestock Primary - Meat, goose and guinea fowl - 1073 - Production - 5510 - tonnes") %>%
+  filter(Entity== "World") %>% 
+    group_by(Entity, Year)
 
-ET3 <- raw %>%
-          dplyr::filter(IncomeGroup %in% c("Low income",
-                                           "High income")) %>%
-                 
-ggplot(aes(x = Year,
-           y = Urban_population,
-           fill = IncomeGroup) ) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  scale_fill_viridis_d(direction = -1) +
-  theme_bw()
+pd_type_long <- pd_type %>% 
+  pivot_longer(cols= "Sheep & Goat":"Goose & Guinea fowl",
+               names_to= "Type",
+               values_to = "Amount")
 
-grid.arrange(ET2, ET3, nrow = 2)
+plt_type<- ggplot(pd_type_long, aes(x= Year,
+                                    y= Amount, 
+                                    fill= Type))+ 
+    geom_area(alpha=0.6 , size=.5, colour="white")+
+    scale_fill_viridis(discrete = T) +
+    theme_minimal()+
+    ggtitle("Global meat production by livestock type, 1961 to 2018")+
+    scale_y_continuous(labels = comma_format(big.mark = ",", decimal.mark = "."))
+
+plt_type2<- ggplot(pd_type_long, aes(x= Year,
+                                     y= Amount,
+                                     group= Type,
+                                     fill= Type))+
+    geom_area() +
+    scale_fill_viridis(discrete = TRUE) +
+    theme(legend.position="none") +
+    ggtitle("Global meat production by livestock type, 1961 to 2018") +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      panel.spacing = unit(0.1, "lines"),
+      strip.text.x = element_text(size = 8)
+    ) +
+    facet_wrap(~ Type, scale="free_y")
+
+grid.arrange(plt_type, plt_type2, nrow= 1)
 ```
 
 
-In figure \@ref(fig:fig2) we observe the level of urbanization in Ethiopia is still strong, but on the other hand, Italy is quite stable. And we observe the similar trend in the plot of income group.
+In figure \@ref(fig:production_type), we see that the dominant livestock types are poultry, cattle (which includes beef and buffalo meat), pig, and sheep & goat to a lesser extent at global level.
 
-Based on this finding, we may conclude that the level of urbanization of the country may be significantly affected by its development of economic and its state income.
+Although production of all major meat types have been increasing in absolute terms, in relative terms the share of global meat types have changed significantly over the last 50 years. In 1961, poultry meat accounted for small portion; by 2013 its share has tripled. In comparison, beef and buffalo meat as a share of total meat production has nearly halved. And the Pigmeat’s share has remained more constant.
+
 
 \clearpage
 
-\section*{}
+## Q2
 
 
-\subsection*{Analysis}
 
 
 
