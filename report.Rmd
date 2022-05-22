@@ -63,7 +63,8 @@ library(gridExtra)
 \section*{Global meat production -- Di Cui}
 
 ```{r read-data1, echo = FALSE, message = FALSE, warning = FALSE}
-
+global_production <-read.csv(here::here("Data/global-meat-production.csv"))
+production <- read.csv(here::here("Data/meat-production-tonnes.csv"))
 ```
 
 \subsection*{Analysis} 
