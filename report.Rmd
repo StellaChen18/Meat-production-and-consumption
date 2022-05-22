@@ -115,7 +115,7 @@ ggplotly(plt_pd)
 
 ## Q1
 ```{r production_type, echo = FALSE , message = FALSE, warning = FALSE, fig.cap = "Comparison of the urbanization development"}
-pd_type <- MT %>%
+pt_world <- MT %>%
   select(-Code) %>% 
   rename("Sheep & Goat"= "Livestock Primary - Sheep and Goat Meat - 1807 - Production - 5510 - tonnes",
          "Beef & Buffalo"= "Livestock Primary - Beef and Buffalo Meat - 1806 - Production - 5510 - tonnes",
@@ -129,12 +129,12 @@ pd_type <- MT %>%
   filter(Entity== "World") %>% 
     group_by(Entity, Year)
 
-pd_type_long <- pd_type %>% 
+pt_world_long <- pt_world %>% 
   pivot_longer(cols= "Sheep & Goat":"Goose & Guinea fowl",
                names_to= "Type",
                values_to = "Amount")
 
-plt_type<- ggplot(pd_type_long, aes(x= Year,
+plt_type<- ggplot(pt_world_long, aes(x= Year,
                                     y= Amount, 
                                     fill= Type))+ 
     geom_area(alpha=0.6 , size=.5, colour="white")+
@@ -143,7 +143,7 @@ plt_type<- ggplot(pd_type_long, aes(x= Year,
     ggtitle("Global meat production by livestock type, 1961 to 2018")+
     scale_y_continuous(labels = comma_format(big.mark = ",", decimal.mark = "."))
 
-plt_type2<- ggplot(pd_type_long, aes(x= Year,
+plt_type2<- ggplot(pt_world_long, aes(x= Year,
                                      y= Amount,
                                      group= Type,
                                      fill= Type))+
@@ -171,11 +171,62 @@ Although production of all major meat types have been increasing in absolute ter
 \clearpage
 
 ## Q2
+```{r tidydata}
+pd_type <- MT %>%
+  select(-Code) %>% 
+  rename("Sheep & Goat"= "Livestock Primary - Sheep and Goat Meat - 1807 - Production - 5510 - tonnes",
+         "Beef & Buffalo"= "Livestock Primary - Beef and Buffalo Meat - 1806 - Production - 5510 - tonnes",
+         "Pig"= "Livestock Primary - Meat, pig - 1035 - Production - 5510 - tonnes",
+         "Wild Game"= "Livestock Primary - Meat, game - 1163 - Production - 5510 - tonnes",
+         "Duck"= "Livestock Primary - Meat, duck - 1069 - Production - 5510 - tonnes",
+         "Poultry"= "Livestock Primary - Meat, Poultry - 1808 - Production - 5510 - tonnes",
+         "Horse"= "Livestock Primary - Meat, horse - 1097 - Production - 5510 - tonnes",
+         "Camel"= "Livestock Primary - Meat, camel - 1127 - Production - 5510 - tonnes",
+         "Goose & Guinea fowl"= "Livestock Primary - Meat, goose and guinea fowl - 1073 - Production - 5510 - tonnes") %>%
+    group_by(Entity, Year) %>%
+    pivot_longer(cols= "Sheep & Goat":"Goose & Guinea fowl",
+               names_to= "Type",
+               values_to = "Amount")
+```
 
+```{r cattle}
+pd_cattle <- pd_type %>% 
+    filter(Type == "Beef & Buffalo") %>% 
+    group_by(Entity) %>% 
+    summarise(Total= sum(Amount))%>% 
+    arrange(-Total)
 
+kable(head(pd_cattle, 20), caption = "Beef and buffalo (cattle) meat production, 1961-2018", booktabs = T)%>%
+kable_material(c("striped", "hover"), position = "center") 
+```
 
+```{r poultry}
+pd_poultry <- pd_type %>% 
+    filter(Type == "Poultry") %>% 
+    group_by(Entity) %>% 
+    summarise(Total= sum(Amount))%>% 
+    arrange(-Total)
 
+kable(head(pd_cattle, 20), caption = "Beef and buffalo (cattle) meat production, 1961-2018", booktabs = T)%>%
+kable_material(c("striped", "hover"), position = "center")
+```
 
+```{r pigmeat}
+pd_pigmeat <- pd_type %>% 
+    filter(Type == "Pig") %>% 
+    group_by(Entity) %>% 
+    summarise(Total= sum(Amount))%>% 
+    arrange(-Total)
+
+kable(head(pd_pigmeat, 20), caption = "Beef and buffalo (cattle) meat production, 1961-2018", booktabs = T)%>%
+kable_material(c("striped", "hover"), position = "center")
+```
+
+In the table \@ref(tab:cattle), we see the global production of cattle (beef and buffalo) meat. From the country's perspective, The United States is the world’s largest beef and buffalo meat producer. Other major producers are Brazil and China.
+
+In the table \@ref(tab:cattle), we can see the production of poultry, like cattle production, the United States is still the world’s largest producer. China and Brazil are also large poultry producers. Collectively, Europe is also a major poultry producer, just below the United States.
+
+But for pigmeat production, China dominates global output, producing just short of half of total pigmeat. The other major producers include the United States, Germany.
 \clearpage
 
 # Conclusion
