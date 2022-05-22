@@ -1,5 +1,5 @@
 ---
-title: "Urbanization, energy consumption, and CO2 emissions with different income level countries"
+title: "Meat production and consumption in world"
 author:
 - familyname: Cui
   othernames: Di
@@ -20,7 +20,7 @@ author:
   correspondingauthor: true
   qualifications:  Master of Business Analytics
 department: TGIF \newline Di Cui &\newline Guanru Chen &\newline Yunzhi Chen
-organization: World Bank
+organization: Our World in Data
 bibliography: references.bib
 biblio-style: authoryear-comp
 linestretch: 1.5
@@ -46,9 +46,25 @@ library(readr)
 library(kableExtra)
 library(bookdown)
 library(gridExtra)
+#library(viridis)
 ```
 
 # Data set introduction
+
+Feeding the world in a sustainable way is one of our most pressing challenges in the coming decades. Meat plays a pivotal role in this.
+
+Meat is an important source of nutrition for many people around the world. Global demand for meat is growing: over the past 50 years, meat production has more than tripled. The world now produces more than 340 million tonnes each year.
+
+But the production of meat has large environmental impacts – increasing greenhouse gas emissions, agricultural land and freshwater use. One of the world’s most pressing challenges is to produce and consume meat, dairy and other protein products in a way that reduces its environmental impacts.
+
+The data set was obtained from the "Our World in Data" data base and contains the following variables regarding to meat production of the world:
+ 
+* Country
+* Year
+* Amount of production: Measure in tons.
+* Livestock types: including beef and buffalo, pigmeat, poultry, sheep and goat,  and other meat types such as horse or camel et cetera.
+* Meat type consumption (kg/capita/year).
+
 
 # Research questions
 
@@ -139,6 +155,7 @@ ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
 ```
 
 From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time. 
+
 \section*{Meat production by livestock type-- Guan Ru Chen}
 
 \subsection*{Research Question}
@@ -319,7 +336,7 @@ But for pigmeat production \@ref(tab:pig), China dominates global output, produc
 \clearpage
 
 
-\section*{Per capita meat consumption}
+\section*{Per capita meat consumption -- Yunzhi Chen}
 
 ```{r read-data, echo = FALSE, message = FALSE}
 # Read data
@@ -341,7 +358,7 @@ meat_consumption <- meat_consumption_type %>% left_join(meat_consumption_total) 
 
 \subsection*{Analysis}
 
-**Which countries eat the most meat in the last 20 years? **
+**Q1: Which countries eat the most meat in the last 20 years? **
 
 As can be seen from the Table \@ref(tab:highest-meanconsumption) below, the top six countries with the highest average meat consumption mean in the world over the 20-year period from 1997 to 2017 are the United States, Australia, New Zealand, Spain, French Polynesia and Bahamas. The highest per capita meat consumption mean of the United States reached about 121.2 kg/capita/year. It can be concluded that countries with high income also consume more meat.
 
@@ -384,7 +401,7 @@ ggplot(highest_consumption_trend,
 
 \clearpage
 
-**What types of meat do people eat?**
+**Q2: What types of meat do people eat?**
 
 From figure \@ref(fig:Meat-type), it illustrates that as a global average, pork has the highest per capita consumption of meat commodities; in 2013, per capita pork consumption was about 16 kg; followed by 15 kg of poultry; 9 kg of beef/buffalo meat; 2 kg of lamb and goat; and only a small percentage of other meats.
 
