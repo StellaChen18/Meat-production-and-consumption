@@ -103,6 +103,29 @@ knitr::kable(table_data2,
 ```
 \clearpage
 
+In terms of changing trends, figure \@ref(fig:highest-consumption-trend) shows the meat consumption per person in these countries over the last 20 years have fluctuated considerably, with the exception of Australia and the United States, where consumption has increased, while all other countries have shown a decreasing trend, but the total value is still much higher than the world per capita meat consumption.
+
+```{r highest-consumption-trend, echo = FALSE, fig.cap = "Consumption trend of top 6 countries"}
+highest_consumption_trend <- meat_consumption %>% 
+             filter(Year >= 1997) %>%
+             filter(Country %in% c("United States", 
+                                   "Australia", 
+                                   "New Zealand", 
+                                   "Spain", 
+                                   "French Polynesia", 
+                                   "Bahamas",
+                                   "World")) 
+
+ggplot(highest_consumption_trend, 
+      aes(x = Year, 
+          y = Total_consumption_kg_capita_yr, 
+          color = Country)) + #color = Country
+ geom_line()  #+ scale_fill_brewer(palette = "Dark2")
+
+```
+
+\clearpage
+
 
 # Visualization of urbanization, energy consumption, and CO2 emissions with different income level countries
 
