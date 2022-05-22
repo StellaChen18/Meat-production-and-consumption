@@ -148,7 +148,7 @@ From Figure\@ref(fig:country-figure), it is obvious that China meat production h
 
 
 \section*{Citation}
-The data set is cited from @Worldbank.
+The data set is cited from @meatproduction.
 
 Analysis of the data is done using the following packages:
 
@@ -156,6 +156,4 @@ bookdown @bookdown1, @bookdown2,
 
 tidyverse @tidyverse,
 
-readr @readr,
-
-kableExtra @kableExtra.
+readr @readr
