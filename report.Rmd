@@ -126,6 +126,30 @@ ggplot(highest_consumption_trend,
 
 \clearpage
 
+**What types of meat do people eat?**
+
+From figure \@ref(fig:Meat-type), it illustrates that as a global average, pork has the highest per capita consumption of meat commodities; in 2013, per capita pork consumption was about 16 kg; followed by 15 kg of poultry; 9 kg of beef/buffalo meat; 2 kg of lamb and goat; and only a small percentage of other meats.
+
+```{r Meat-type, echo=FALSE, fig.cap = "Meat type changes over time"}
+Meat_type <- meat_consumption %>% filter(Country == "World") %>%
+  pivot_longer(col = Mutton_Goat:Beef_Bufallo,
+               names_to = "Type",
+               values_to = "Per_capita_meat_consumption_by_type")
+
+ggplot(Meat_type, 
+      aes(x = Year, 
+          y = Per_capita_meat_consumption_by_type,
+          fill = Type)) + 
+ scale_x_continuous(
+    breaks = seq(min(Meat_type$Year),
+                 max(Meat_type$Year), by=4))+
+ geom_col() 
+ #ggtitle("Meat type changes over time")
+
+#ggplotly()
+```
+
+\clearpage
 
 # Visualization of urbanization, energy consumption, and CO2 emissions with different income level countries
 
