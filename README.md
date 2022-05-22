@@ -17,7 +17,7 @@
 
 The data set was obtained from the "Our World in Data" data base and contains the following variables regarding to meat production of the world:
 
-* Entity
+* Entity (continent/country)
 
 * Year
 

@@ -46,7 +46,7 @@ library(readr)
 library(kableExtra)
 library(bookdown)
 library(gridExtra)
-#library(viridis)
+library(viridis)
 ```
 
 # Data set introduction
@@ -137,8 +137,6 @@ df2 <- production %>%
 df2 <- df2 %>%
   filter(Code != "" &
         Code %in% c("CHN", "USA", "BRA", "DEU", "FRA", "ARG"))
- 
-
 ```
 
 
@@ -150,8 +148,6 @@ ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
   scale_x_continuous(breaks = c(1961,1970,1980, 1990, 2000, 2010,2018))+
   ylab("Top 6 countries of livestock meat production (million tonnes)")+
   theme_bw()
-
-  
 ```
 
 From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time. 
@@ -193,7 +189,7 @@ plt_pd<- ggplot(production, aes(x= Year,
     scale_fill_viridis(discrete = T) +
     theme_minimal()+
     ggtitle("Global meat production, 1961 to 2018")+
-    scale_y_continuous(labels = comma_format(big.mark = ","))
+    scale_y_continuous()
 ```
 
 
@@ -449,6 +445,8 @@ bookdown @bookdown1, @bookdown2,
 
 tidyverse @tidyverse,
 
-readr @readr
+readr @readr,
+
+viridis @viridis
 
 
