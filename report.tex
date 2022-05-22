@@ -228,7 +228,7 @@
 
 \def\webaddress{\url{http://company.com/stats/consulting/}} %NEW: URl
 \def\abn{12 377 614 630}                                    % NEW: ABN
-\def\logo{\includegraphics[width=6cm]{Figures/logo}}  %NEW: Changing logo
+\def\logo{\includegraphics[width=6cm]{Figures/WeChat Image_20220521114617}}  %NEW: Changing logo
 \def\extraspace{\vspace*{1.6cm}}
 \makeatletter
 \def\contactdetails{\faicon{phone} & \@telephone \\
@@ -311,214 +311,79 @@
 \hypertarget{data-set-introduction}{%
 \section{Data set introduction}\label{data-set-introduction}}
 
-At the World Bank, the Development Data Group coordinates statistical and data work and maintains a number of macro, financial and sector databases. The data set that we used was obtained from the World Bank database. This report explores the variation in data for six countries in different income groups by focusing on three variables of the data set: CO2 emissions (metric tons per capita), urban population and energy use (kg of oil equivalent per capita).
-
-The CO2 emissions refers to annual anthropogenic emissions from data on fossil fuel consumption and world cement manufacturing.
-
-Urban population refers to people living in urban areas as defined by national statistical offices.
-
-Total energy use includes energy usage from combustible renewable and waste - solid biomass and animal products, gas and liquid from biomass, and industrial and municipal waste.
-
-More information available \href{https://data.worldbank.org/}{here}.
-
 \hypertarget{research-questions}{%
 \section{Research questions}\label{research-questions}}
-
-\begin{itemize}
-\item
-  For China and India, which country has more CO2 emissions per capita during 1960 to 2020?
-\item
-  How did the CO2 emissions per capita of China and India develop from 1960 to 2020?
-\item
-  How's the development of urbanization of the two selected countries of two types of income group:
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Ethiopia: Low income.
-  \item
-    Italy: High income
-  \end{enumerate}
-\item
-  Would the situation be similar with the other income group countries.
-
-  Is the situation similar with the status of observation from last question.
-\item
-  Overall energy use kg of oil\_equivalent per capita in Belgium and Turkey from 1960 to 2015.
-\item
-  The trend in energy use kg of oil\_equivalent per capita of Belgium and Turkey from 1960 to 2015.
-\end{itemize}
 
 \clearpage
 
 \hypertarget{exploratory-data-analysis}{%
 \section{Exploratory data analysis}\label{exploratory-data-analysis}}
 
-\section*{Country China and India}
+\clearpage
+
+\section*{Per capita meat consumption}
 
 \subsection*{Analysis}
 
-\textbf{Q1:}
+\textbf{Which countries eat the most meat in the last 20 years? }
+
+As can be seen from the Table \ref{tab:highest-meanconsumption} below, the top six countries with the highest average meat consumption mean in the world over the 20-year period from 1997 to 2017 are the United States, Australia, New Zealand, Spain, French Polynesia and Bahamas. The highest per capita meat consumption mean of the United States reached about 121.2 kg/capita/year. It can be concluded that countries with high income also consume more meat.
 
 \begin{table}
 
-\caption{\label{tab:co2table}The mean and median of CO2 emissions(metric tones per capita) in China and India }
-\centering
-\begin{tabular}[t]{l|r|r}
-\hline
-Country\_Name & mean & median\\
-\hline
-China & 2.5792506 & 2.0384107\\
-\hline
-India & 0.7221454 & 0.5959397\\
-\hline
-\end{tabular}
-\end{table}
-
-In table\ref{tab:co2table}, we observe the mean and median of CO2 emissions per capita in China are all higher than the mean and median in India. The mean and median in China are all over 2 metric tons. However, the mean and median in India are all under 1 metric tons.
-
-\textbf{Q2:}
-
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/co2trend-1.pdf}
-\caption{\label{fig:co2trend}The CO2 emissions(metric tones per capita) in China and India}
-\end{figure}
-
-Figure\ref{fig:co2trend} shows the uptrend development of CO2 emissions per capita in China and India. In China, the number of CO2 emissions per capita decreased after 1960, but the number has increased from 1970 and raised sharply from 2000, and the number has arrived at around 6.5 metric tons in 2010. In India, although the number increased all the time, the number was always under 2 metric tons.
-
-\clearpage
-
-\section*{Country Ethiopia and Italy}
-
-\subsection*{Exploratory data analysis}
-
-\begin{table}
-
-\caption{\label{tab:tab2}Urban population per year of Ethiopia and Italy from 1999-2018}
-\centering
-\begin{tabular}[t]{rrr}
-\toprule
-Year & Ethiopia & Italy\\
-\midrule
-1999 & 9363839 & 38226137\\
-2000 & 9761536 & 38277624\\
-2001 & 10174157 & 38333314\\
-2002 & 10604081 & 38447500\\
-2003 & 11049316 & 38686985\\
-\addlinespace
-2004 & 11510093 & 39006818\\
-2005 & 11986371 & 39267369\\
-2006 & 12478999 & 39454178\\
-2007 & 13001478 & 39722857\\
-2008 & 13689470 & 40056298\\
-\addlinespace
-2009 & 14413055 & 40308358\\
-2010 & 15178365 & 40502481\\
-2011 & 15986316 & 40641670\\
-2012 & 16839218 & 40894259\\
-2013 & 17717910 & 41548775\\
-\addlinespace
-2014 & 18635946 & 42109853\\
-2015 & 19590313 & 42247229\\
-2016 & 20581872 & 42351339\\
-2017 & 21609845 & 42462869\\
-2018 & 22678295 & 42566587\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Because the data is across over 40 years, which is a bit longer to present. So in Table \ref{tab:tab2} we extract the urban population of two countries since 1999. And noticeably, the urban population of Ethiopia is lower than Italy throughout the whole period.
-
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/fig2-1.pdf}
-\caption{\label{fig:fig2}Comparison of the urbanization development}
-\end{figure}
-
-In figure \ref{fig:fig2} we observe the level of urbanization in Ethiopia is still strong, but on the other hand, Italy is quite stable. And we observe the similar trend in the plot of income group.
-
-Based on this finding, we may conclude that the level of urbanization of the country may be significantly affected by its development of economic and its state income.
-
-\clearpage
-
-\section*{Country Belgium and Turkey}
-
-\subsection*{Analysis}
-
-\textbf{The total energy use of Belgium and Turkey}
-
-From 1960 to 2015, the total energy use of Belgium is 258677.63 kg of oil\_equivalent per capita, while it is 51666.23 kg in Turkey. See Table \ref{tab:energyuse-Tot}.
-
-\begin{table}
-
-\caption{\label{tab:energyuse-Tot}Total energy use of Belgium and Turkey}
+\caption{\label{tab:highest-meanconsumption}Top 6 countries with the largest mean of meat consumption over years}
 \centering
 \begin{tabular}[t]{l|r}
 \hline
-Country\_Name & Total\_energy\_use\\
+Country & Mean\_consumption\_kg\_capita\_yr\\
 \hline
-Belgium & 258677.63\\
+United States & 121.19\\
 \hline
-Turkey & 51666.23\\
+Australia & 114.96\\
+\hline
+New Zealand & 105.19\\
+\hline
+Spain & 105.14\\
+\hline
+French Polynesia & 99.86\\
+\hline
+Bahamas & 98.57\\
 \hline
 \end{tabular}
 \end{table}
+\clearpage
 
-\textbf{The trend}
-
-Figure \ref{fig:trend} shows the trend of the energy use kg of oil\_equivalent per capita in Belgium and Turkey. In general, energy use kg of oil\_equivalent per capita in both countries shows an upward trend over the 55-year period, but Belgium's energy use is much higher than Turkey's. Belgium shows a fluctuating upward trend, with a larger increase than Turkey, while Turkey shows a steady upward trend.
+In terms of changing trends, figure \ref{fig:highest-consumption-trend} shows the meat consumption per person in these countries over the last 20 years have fluctuated considerably, with the exception of Australia and the United States, where consumption has increased, while all other countries have shown a decreasing trend, but the total value is still much higher than the world per capita meat consumption.
 
 \begin{figure}
 \centering
-\includegraphics{report_files/figure-latex/trend-1.pdf}
-\caption{\label{fig:trend}Energy use of Belgium and Turkey}
+\includegraphics{report_files/figure-latex/highest-consumption-trend-1.pdf}
+\caption{\label{fig:highest-consumption-trend}Consumption trend of top 6 countries}
 \end{figure}
+
+\clearpage
+
+\textbf{What types of meat do people eat?}
+
+From figure \ref{fig:Meat-type}, it illustrates that as a global average, pork has the highest per capita consumption of meat commodities; in 2013, per capita pork consumption was about 16 kg; followed by 15 kg of poultry; 9 kg of beef/buffalo meat; 2 kg of lamb and goat; and only a small percentage of other meats.
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/Meat-type-1.pdf}
+\caption{\label{fig:Meat-type}Meat type changes over time}
+\end{figure}
+
+\clearpage
 
 \hypertarget{visualization-of-urbanization-energy-consumption-and-co2-emissions-with-different-income-level-countries}{%
 \section{Visualization of urbanization, energy consumption, and CO2 emissions with different income level countries}\label{visualization-of-urbanization-energy-consumption-and-co2-emissions-with-different-income-level-countries}}
 
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/co2-conclusion-1.pdf}
-\caption{\label{fig:co2-conclusion}The CO2 emissions(metric tones per capita) in six countries}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics{report_files/figure-latex/urbanization-1} 
-
-}
-
-\caption{The urbanization development of six countries}\label{fig:urbanization}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/energy-use-1.pdf}
-\caption{\label{fig:energy-use}Energy use kg of oil\_equivalent per capita in six counties}
-\end{figure}
-
-\clearpage
-
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-To conclude, the graphs illustrate that the three indicators varies accordingly for different classes of income groups,
-
-\begin{itemize}
-\item
-  About the CO2 emissions, almost all income groups show an uptrend development except for the high income group, which develops steadily. And the number of CO2 emissions in high-income and upper-middle-income countries is always higher than in the other two groups, which is higher than three metric tons in the recent 30 years. However, in other income groups, the number is under two metric tons, especially in the low-income group, the number is under 0.5 metric tons. See Figure \ref{fig:co2-conclusion}.
-\item
-  From Figure \ref{fig:urbanization}, we can see the urban population of our selected countries all present a steady increasing status. With this kind of explosive growth of cities globally signifies the demographic transition from rural to urban, and is associated with state's economic activity shifts from an agriculture-based economy to mass industry, technology, and service, which improve the country's income status.
-\item
-  Figure \ref{fig:energy-use} illustrates that energy use has been growing rapidly in low- and middle-income economies, but high-income economies still use almost five times as much energy on a per capita basis.
-\end{itemize}
-
 \section*{Citation}
 
-The data set is cited from \textcite{Worldbank}.
+The data set is cited from \textcite{owidmeatproduction}.
 
 Analysis of the data is done using the following packages:
 
