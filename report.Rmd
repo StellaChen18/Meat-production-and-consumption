@@ -108,6 +108,38 @@ From Figure\@ref(fig:continent-figure), we can see all continents show an uptren
 
 **Q2:  How do the Top six countries of meat production develop from 1961 to 2018?**
 
+```{r tidy-data2}
+
+production <- production %>%
+   rename("meat_production" = "Livestock.Primary...Meat..Total...1765...Production...5510...tonnes") %>%
+  mutate(meat_production = round(meat_production/1000000, digits = 2)) 
+
+df2 <- production %>%
+  group_by(Entity) %>%
+  mutate(meat_sum = sum(meat_production)) %>%
+  ungroup() %>%
+  arrange(-meat_sum) 
+
+df2 <- df2 %>%
+  filter(Code != "" &
+        Code %in% c("CHN", "USA", "BRA", "DEU", "FRA", "ARG"))
+ 
+
+```
+
+```{r country-figure}
+
+ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
+  geom_line()+
+  scale_fill_brewer(palette = "Set3")+
+  scale_x_continuous(breaks = c(1961,1970,1980, 1990, 2000, 2010,2018))+
+  ylab("Top 6 countries of livestock meat production (million tonnes)")+
+  theme_bw()
+
+  
+```
+
+From Figure\@ref(fig:country-figure), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time.
 
 \clearpage
 
