@@ -226,7 +226,7 @@
 
 \def\webaddress{\url{http://company.com/stats/consulting/}} %NEW: URl
 \def\abn{12 377 614 630}                                    % NEW: ABN
-\def\logo{\includegraphics[width=6cm]{Figures/logo}}  %NEW: Changing logo
+\def\logo{\includegraphics[width=6cm]{Figures/WeChat Image_20220521114617}}  %NEW: Changing logo
 \def\extraspace{\vspace*{1.6cm}}
 \makeatletter
 \def\contactdetails{\faicon{phone} & \@telephone \\
@@ -316,6 +316,7 @@
 \hypertarget{exploratory-data-analysis}{%
 \section{Exploratory data analysis}\label{exploratory-data-analysis}}
 
+<<<<<<< HEAD
 \section*{}
 
 \subsection*{Analysis}
@@ -471,9 +472,39 @@ But for pigmeat production \ref{tab:pig}, China dominates global output, produci
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
+=======
+\section*{Global meat production -- Di Cui}
+
+\subsection*{Analysis}
+
+\textbf{Q1: How does global meat production develop from 1961 to 2018?}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/continent-figure-1.pdf}
+\caption{\label{fig:continent-figure}Global meat production from 1961 to 2018}
+\end{figure}
+
+From Figure\ref{fig:continent-figure}, we can see all continents show an uptrend. In particular, Asia production increased from under 10 million tonnes to around 150 million tonnes, and produced more meat than Europe in 1992, and become the largest meat production continent. And Europe shows a fluctuating growth, while another continents show steady growth.
+
+\clearpage
+
+\textbf{Q2: How do the Top six countries of meat production develop from 1961 to 2018?}
+
+\begin{figure}
+\centering
+\includegraphics{report_files/figure-latex/country-1.pdf}
+\caption{\label{fig:country}Top six countries' meat production from 1961 to 2018}
+\end{figure}
+
+From Figure\ref{fig:country}, it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time.
+
+\clearpage
+
+>>>>>>> 4f952e47aacfcce5877979dee0ef604f6632cda7
 \section*{Citation}
 
-The data set is cited from \textcite{Worldbank}.
+The data set is cited from \textcite{meatproduction}.
 
 Analysis of the data is done using the following packages:
 
@@ -481,9 +512,7 @@ bookdown \textcite{bookdown1}, \textcite{bookdown2},
 
 tidyverse \textcite{tidyverse},
 
-readr \textcite{readr},
-
-kableExtra \textcite{kableExtra}.
+readr \textcite{readr}
 
 \printbibliography
 
