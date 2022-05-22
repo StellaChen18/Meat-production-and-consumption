@@ -104,7 +104,8 @@ ggplot(df, aes(x = Year, y = meat_production, color = Entity))+
   theme_bw()
 ```  
 
-From Figure\@ref(fig:continent-figure), we can see all continents show an uptrend. In particular, Asia production increased from under 10 million tonnes to around 150 million tonnes, and produced more meat than Europe in 1992, and become the largest meat production continent. And Europe shows a fluctuating growth, while another continents show steady growth.
+From Figure\@ref(fig:continent-figure), we can see all continents show an uptrend. In 2018, production was around 340 million tonnes.
+In particular, Asia production increased from under 10 million tonnes to around 150 million tonnes, and produced more meat than Europe in 1992, and become the largest meat production continent. And Europe shows a fluctuating growth, while another continents show steady growth.
 
 \clearpage
 
@@ -143,10 +144,184 @@ ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
 ```
 
 From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time. 
+\section*{Meat production by livestock type-- Guan Ru Chen}
+
+\subsection*{Research Question}
+
+1. What's the production distribution of different livestock types across the world?
+
+2. Which countries are main production country for different types of meat, such as: Beef and buffalo, pig and poultry? 
+
+\subsection*{Analysis} 
+
+```{r load-data, echo = FALSE , message = FALSE, warning = FALSE}
+GD <- read_csv(file = "Data/global-meat-production.csv")
+MT <- read_csv(file = "Data/global-meat-production-by-livestock-type.csv")
+```
+
+**Q1: What's the production distribution of different livestock types across the world?**
+
+```{r production, echo = FALSE , message = FALSE, warning = FALSE}
+production <- GD %>%
+  select(-Code) %>% 
+  filter(Entity %in% c("Asia",
+                       "Europe",
+                       "Northern America",
+                       "South America",
+                       "Central America",
+                       "Africa",
+                       "Oceania")) %>%
+    rename("Production"= "Livestock Primary - Meat, Total - 1765 - Production - 5510 - tonnes") %>%
+    group_by(Entity, Year)
+
+plt_pd<- ggplot(production, aes(x= Year,
+                                y= Production, 
+                                fill= Entity)) + 
+    geom_area(alpha=0.6 , size=.5, colour="white")+
+    scale_fill_viridis(discrete = T) +
+    theme_minimal()+
+    ggtitle("Global meat production, 1961 to 2018")+
+    scale_y_continuous(labels = comma_format(big.mark = ","))
+```
+
+
+```{r productiontype, echo = FALSE , message = FALSE, warning = FALSE, fig.cap = "Global meat production by livestock type, 1961 to 2018"}
+pt_world <- MT %>%
+  select(-Code) %>% 
+  rename("Sheep & Goat"= "Livestock Primary - Sheep and Goat Meat - 1807 - Production - 5510 - tonnes",
+         "Beef & Buffalo"= "Livestock Primary - Beef and Buffalo Meat - 1806 - Production - 5510 - tonnes",
+         "Pig"= "Livestock Primary - Meat, pig - 1035 - Production - 5510 - tonnes",
+         "Wild Game"= "Livestock Primary - Meat, game - 1163 - Production - 5510 - tonnes",
+         "Duck"= "Livestock Primary - Meat, duck - 1069 - Production - 5510 - tonnes",
+         "Poltry"= "Livestock Primary - Meat, Poultry - 1808 - Production - 5510 - tonnes",
+         "Horse"= "Livestock Primary - Meat, horse - 1097 - Production - 5510 - tonnes",
+         "Camel"= "Livestock Primary - Meat, camel - 1127 - Production - 5510 - tonnes",
+         "Goose & Guinea fowl"= "Livestock Primary - Meat, goose and guinea fowl - 1073 - Production - 5510 - tonnes") %>%
+  filter(Entity== "World") %>% 
+    group_by(Entity, Year)
+
+pt_world_long <- pt_world %>% 
+  pivot_longer(cols= "Sheep & Goat":"Goose & Guinea fowl",
+               names_to= "Type",
+               values_to = "Amount")
+
+
+plt_type<- ggplot(pt_world_long, aes(x= Year,
+                                     y= Amount,
+                                     group= Type,
+                                     fill= Type))+
+    geom_area() +
+    scale_fill_viridis(discrete = TRUE)+
+    theme_minimal() +
+    facet_wrap(~ Type, scale="free_y")
+
+plt_type
+```
+
+
+In figure \@ref(fig:productiontype), we see that the dominant livestock types are poultry, cattle (which includes beef and buffalo meat), pig, and sheep & goat to a lesser extent at global level.
+
+Although production of all major meat types have been increasing in absolute terms, in relative terms the share of global meat types have changed significantly over the last 50 years. In 1961, poultry meat accounted for small portion; by 2013 its share has tripled. In comparison, beef and buffalo meat as a share of total meat production has nearly halved. And the Pigmeat’s share has remained more constant.
+
 
 \clearpage
 
+**Q2: Which countries are main production country for different types of meat, such as: Beef and buffalo, pig and poultry? **
 
+```{r tidydata, echo = FALSE , message = FALSE, warning = FALSE}
+pd_type <- MT %>%
+  select(-Code) %>% 
+  rename("Sheep & Goat"= "Livestock Primary - Sheep and Goat Meat - 1807 - Production - 5510 - tonnes",
+         "Beef & Buffalo"= "Livestock Primary - Beef and Buffalo Meat - 1806 - Production - 5510 - tonnes",
+         "Pig"= "Livestock Primary - Meat, pig - 1035 - Production - 5510 - tonnes",
+         "Wild Game"= "Livestock Primary - Meat, game - 1163 - Production - 5510 - tonnes",
+         "Duck"= "Livestock Primary - Meat, duck - 1069 - Production - 5510 - tonnes",
+         "Poultry"= "Livestock Primary - Meat, Poultry - 1808 - Production - 5510 - tonnes",
+         "Horse"= "Livestock Primary - Meat, horse - 1097 - Production - 5510 - tonnes",
+         "Camel"= "Livestock Primary - Meat, camel - 1127 - Production - 5510 - tonnes",
+         "Goose & Guinea fowl"= "Livestock Primary - Meat, goose and guinea fowl - 1073 - Production - 5510 - tonnes") %>%
+    group_by(Entity, Year) %>%
+    pivot_longer(cols= "Sheep & Goat":"Goose & Guinea fowl",
+               names_to= "Type",
+               values_to = "Amount")
+```
+
+```{r cattle, echo = FALSE , message = FALSE, warning = FALSE}
+pd_cattle <- pd_type %>% 
+    filter(Type == "Beef & Buffalo") %>% 
+    group_by(Entity) %>% 
+    summarise(Total= sum(Amount))%>% 
+    arrange(-Total)
+
+kable(head(pd_cattle, 20), caption = "Beef and buffalo (cattle) meat production, 1961-2018", booktabs = T)%>%
+kable_material(c("striped", "hover"), position = "center") 
+
+top_cattle<- pd_type %>% 
+  filter(Entity %in% c("United States",
+                       "China",
+                       "Brazil")) %>% 
+  filter(Type== "Beef & Buffalo") %>% 
+  group_by(Entity)
+
+ggplot(top_cattle, aes(x= Year, y= Amount, color= Entity))+
+      geom_line()+
+    scale_fill_viridis(discrete = TRUE) +
+    theme_minimal()
+```
+
+```{r poultry, echo = FALSE , message = FALSE, warning = FALSE}
+pd_poultry <- pd_type %>% 
+    filter(Type == "Poultry") %>% 
+    group_by(Entity) %>% 
+    summarise(Total= sum(Amount))%>% 
+    arrange(-Total)
+
+kable(head(pd_cattle, 20), caption = "Poultry meat production, 1961-2018", booktabs = T)%>%
+kable_material(c("striped", "hover"), position = "center")
+
+top_poultry<- pd_type %>% 
+  filter(Entity %in% c("United States",
+                       "China",
+                       "Brazil",
+                       "Europe")) %>% 
+  filter(Type== "Poultry") %>% 
+  group_by(Entity)
+
+ggplot(top_poultry, aes(x= Year, y= Amount, color= Entity))+
+  geom_line()+
+  scale_fill_viridis(discrete = TRUE) +
+  theme_minimal()
+```
+
+```{r pig, echo = FALSE , message = FALSE, warning = FALSE}
+pd_pigmeat <- pd_type %>% 
+    filter(Type == "Pig") %>% 
+    group_by(Entity) %>% 
+    summarise(Total= sum(Amount))%>% 
+    arrange(-Total)
+
+kable(head(pd_pigmeat, 20), caption = "Pig meat production, 1961-2018", booktabs = T)%>%
+kable_material(c("striped", "hover"), position = "center")
+
+top_pigmeat<- pd_type %>% 
+  filter(Entity %in% c("United States",
+                       "China",
+                       "Germany")) %>% 
+  filter(Type== "Pig") %>% 
+  group_by(Entity)
+
+ggplot(top_pigmeat, aes(x= Year, y= Amount, color= Entity))+
+  geom_line()+
+  scale_fill_viridis(discrete = TRUE) +
+  theme_minimal()
+```
+
+In the table \@ref(tab:cattle), we see the global production of cattle (beef and buffalo) meat. From the country's perspective, The United States is the world’s largest beef and buffalo meat producer. Other major producers are Brazil and China.
+
+In the table \@ref(tab:poultry), we can see the production of poultry, like cattle production, the United States is still the world’s largest producer. China and Brazil are also large poultry producers. Collectively, Europe is also a major poultry producer, just below the United States.
+
+But for pigmeat production \@ref(tab:pig), China dominates global output, producing just short of half of total pigmeat. The other major producers include the United States, Germany.
+\clearpage
 
 
 
