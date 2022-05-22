@@ -360,7 +360,7 @@ meat_consumption <- meat_consumption_type %>% left_join(meat_consumption_total) 
 
 **Q1: Which countries eat the most meat in the last 20 years? **
 
-As can be seen from the Table \@ref(tab:highest-meanconsumption) below, the top six countries with the highest average meat consumption mean in the world over the 20-year period from 1997 to 2017 are the United States, Australia, New Zealand, Spain, French Polynesia and Bahamas. The highest per capita meat consumption mean of the United States reached about 121.2 kg/capita/year. It can be concluded that countries with high income also consume more meat.
+As can be seen from the Table \@ref(tab:highest-meanconsumption) below, the top six countries with the highest average meat consumption mean in the world over the 20-year period from 1997 to 2017 are the United States, Australia, New Zealand, Spain, French Polynesia and Bahamas. The highest per capita meat consumption mean of the United States reached about 121.2 kg/capita/year. It can be concluded that countries with high income also consume more meat. Developed countries account for a large share of the six countries with the highest average meat consumption over years. 
 
 ```{r highest-meanconsumption, echo = FALSE}
 
@@ -394,8 +394,8 @@ highest_consumption_trend <- meat_consumption %>%
 ggplot(highest_consumption_trend, 
       aes(x = Year, 
           y = Total_consumption_kg_capita_yr, 
-          color = Country)) + #color = Country
- geom_line()  #+ scale_fill_brewer(palette = "Dark2")
+          color = Country)) + 
+ geom_line()  
 
 ```
 
@@ -419,7 +419,6 @@ ggplot(Meat_type,
     breaks = seq(min(Meat_type$Year),
                  max(Meat_type$Year), by=4))+
  geom_col() 
- #ggtitle("Meat type changes over time")
 
 #ggplotly()
 ```
