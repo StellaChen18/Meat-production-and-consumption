@@ -69,9 +69,9 @@ production <- read.csv(here::here("Data/meat-production-tonnes.csv"))
 
 \subsection*{Analysis} 
 
-**Q1:**
+**Q1: How does global meat production develop from 1961 to 2018?**
 
-**Q2:**
+**Q2:  How do the Top six countries of meat production develop from 1961 to 2018?**
 
 
 \clearpage
