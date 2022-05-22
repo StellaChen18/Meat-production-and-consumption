@@ -71,7 +71,7 @@ production <- read.csv(here::here("Data/meat-production-tonnes.csv"))
 
 **Q1: How does global meat production develop from 1961 to 2018?**
 
-```{r tidy-data}
+```{r tidy-data, echo = FALSE, message = FALSE, warning = FALSE}
 
 global_production <- global_production %>%
   rename("meat_production" = "Livestock.Primary...Meat..Total...1765...Production...5510...tonnes") %>%
@@ -93,7 +93,7 @@ df <- df %>%
  
 ```
 
-```{r continent-figure, fig.cap="Global meat production from 1961 to 2018"}
+```{r continent-figure, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Global meat production from 1961 to 2018"}
 ggplot(df, aes(x = Year, y = meat_production, color = Entity))+
   geom_line()+
   scale_fill_brewer(palette = "Set3")+
@@ -105,10 +105,11 @@ ggplot(df, aes(x = Year, y = meat_production, color = Entity))+
 
 From Figure\@ref(fig:continent-figure), we can see all continents show an uptrend. In particular, Asia production increased from under 10 million tonnes to around 150 million tonnes, and produced more meat than Europe in 1992, and become the largest meat production continent. And Europe shows a fluctuating growth, while another continents show steady growth.
 
+\clearpage
 
 **Q2:  How do the Top six countries of meat production develop from 1961 to 2018?**
 
-```{r tidy-data2}
+```{r tidy-data2, echo = FALSE, message = FALSE, warning = FALSE}
 
 production <- production %>%
    rename("meat_production" = "Livestock.Primary...Meat..Total...1765...Production...5510...tonnes") %>%
@@ -127,7 +128,8 @@ df2 <- df2 %>%
 
 ```
 
-```{r country-figure}
+
+```{r country, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Top six countries' meat production from 1961 to 2018"}
 
 ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
   geom_line()+
@@ -139,7 +141,7 @@ ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
   
 ```
 
-From Figure\@ref(fig:country-figure), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time.
+From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time. 
 
 \clearpage
 
