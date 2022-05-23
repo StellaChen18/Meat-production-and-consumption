@@ -126,7 +126,7 @@ In particular, Asia production increased from under 10 million tonnes to around 
 
 production <- production %>%
    rename("meat_production" = "Livestock.Primary...Meat..Total...1765...Production...5510...tonnes") %>%
-  mutate(meat_production = round(meat_production/1000000, digits = 2)) 
+  mutate(meat_production = round(meat_production/1000000, digits = 2))
 
 df2 <- production %>%
   group_by(Entity) %>%
@@ -180,16 +180,17 @@ production <- GD %>%
                        "Africa",
                        "Oceania")) %>%
     rename("Production"= "Livestock Primary - Meat, Total - 1765 - Production - 5510 - tonnes") %>%
-    group_by(Entity, Year)
+    group_by(Entity, Year) %>% 
+    mutate(Sum = round(Production/1000000, digits = 2))
 
 plt_pd<- ggplot(production, aes(x= Year,
-                                y= Production, 
+                                y= Sum, 
                                 fill= Entity)) + 
     geom_area(alpha=0.6 , size=.5, colour="white")+
     scale_fill_viridis(discrete = T) +
     theme_minimal()+
     ggtitle("Global meat production, 1961 to 2018")+
-    scale_y_continuous()
+    ylab("Production (million tonnes)")
 ```
 
 
@@ -206,16 +207,17 @@ pt_world <- MT %>%
          "Camel"= "Livestock Primary - Meat, camel - 1127 - Production - 5510 - tonnes",
          "Goose & Guinea fowl"= "Livestock Primary - Meat, goose and guinea fowl - 1073 - Production - 5510 - tonnes") %>%
   filter(Entity== "World") %>% 
-    group_by(Entity, Year)
+  group_by(Entity, Year) 
 
 pt_world_long <- pt_world %>% 
   pivot_longer(cols= "Sheep & Goat":"Goose & Guinea fowl",
                names_to= "Type",
-               values_to = "Amount")
+               values_to = "Amount") %>% 
+  mutate(Sum = round(Amount/1000000, digits = 2))
 
 
 plt_type<- ggplot(pt_world_long, aes(x= Year,
-                                     y= Amount,
+                                     y= Sum,
                                      group= Type,
                                      fill= Type))+
     geom_area() +
