@@ -223,7 +223,8 @@ plt_type<- ggplot(pt_world_long, aes(x= Year,
     geom_area() +
     scale_fill_viridis(discrete = TRUE)+
     theme_minimal() +
-    facet_wrap(~ Type, scale="free_y")
+    facet_wrap(~ Type, scale="free_y")+
+    ylab("Production by livestiock type (million tonnes)")
 
 plt_type
 ```
@@ -260,10 +261,12 @@ pd_type <- MT %>%
 pd_cattle <- pd_type %>% 
     filter(Type == "Beef & Buffalo") %>% 
     group_by(Entity) %>% 
-    summarise(Total= sum(Amount))%>% 
-    arrange(-Total)
+    summarise(Total= sum(Amount))%>%
+    mutate(Production = round(Total/1000000, digits = 2)) %>% 
+    select(-Total) %>%
+    arrange(-Production)
 
-kable(head(pd_cattle, 20), caption = "Beef and buffalo (cattle) meat production, 1961-2018", booktabs = T)%>%
+kable(head(pd_cattle, 20), caption = "Beef and buffalo (cattle) meat production (million tonnes), 1961-2018", booktabs = T)%>%
 kable_material(c("striped", "hover"), position = "center") 
 
 top_cattle<- pd_type %>% 
@@ -271,11 +274,13 @@ top_cattle<- pd_type %>%
                        "China",
                        "Brazil")) %>% 
   filter(Type== "Beef & Buffalo") %>% 
+  mutate(Production = round(Amount/1000000, digits = 2)) %>%
   group_by(Entity)
 
-ggplot(top_cattle, aes(x= Year, y= Amount, color= Entity))+
-      geom_line()+
+ggplot(top_cattle, aes(x= Year, y= Production, color= Entity))+
+    geom_line()+
     scale_fill_viridis(discrete = TRUE) +
+    ylab("Production (million tonnes)")+
     theme_minimal()
 ```
 
@@ -283,10 +288,12 @@ ggplot(top_cattle, aes(x= Year, y= Amount, color= Entity))+
 pd_poultry <- pd_type %>% 
     filter(Type == "Poultry") %>% 
     group_by(Entity) %>% 
-    summarise(Total= sum(Amount))%>% 
-    arrange(-Total)
+    summarise(Total= sum(Amount))%>%
+    mutate(Production = round(Total/1000000, digits = 2)) %>%
+    select(-Total) %>%
+    arrange(-Production)
 
-kable(head(pd_cattle, 20), caption = "Poultry meat production, 1961-2018", booktabs = T)%>%
+kable(head(pd_poultry, 20), caption = "Poultry meat production (million tonnes), 1961-2018", booktabs = T)%>%
 kable_material(c("striped", "hover"), position = "center")
 
 top_poultry<- pd_type %>% 
@@ -295,22 +302,26 @@ top_poultry<- pd_type %>%
                        "Brazil",
                        "Europe")) %>% 
   filter(Type== "Poultry") %>% 
+  mutate(Production = round(Amount/1000000, digits = 2)) %>%
   group_by(Entity)
 
-ggplot(top_poultry, aes(x= Year, y= Amount, color= Entity))+
-  geom_line()+
-  scale_fill_viridis(discrete = TRUE) +
-  theme_minimal()
+ggplot(top_poultry, aes(x= Year, y= Production, color= Entity))+
+    geom_line()+
+    scale_fill_viridis(discrete = TRUE) +
+    ylab("Production (million tonnes)")+
+    theme_minimal()
 ```
 
 ```{r pig, echo = FALSE , message = FALSE, warning = FALSE}
 pd_pigmeat <- pd_type %>% 
     filter(Type == "Pig") %>% 
     group_by(Entity) %>% 
-    summarise(Total= sum(Amount))%>% 
-    arrange(-Total)
+    summarise(Total= sum(Amount))%>%
+    mutate(Production = round(Total/1000000, digits = 2)) %>%
+    select(-Total) %>% 
+    arrange(-Production)
 
-kable(head(pd_pigmeat, 20), caption = "Pig meat production, 1961-2018", booktabs = T)%>%
+kable(head(pd_pigmeat, 20), caption = "Pig meat production (million tonnes), 1961-2018", booktabs = T)%>%
 kable_material(c("striped", "hover"), position = "center")
 
 top_pigmeat<- pd_type %>% 
@@ -318,12 +329,14 @@ top_pigmeat<- pd_type %>%
                        "China",
                        "Germany")) %>% 
   filter(Type== "Pig") %>% 
+  mutate(Production = round(Amount/1000000, digits = 2)) %>%
   group_by(Entity)
 
-ggplot(top_pigmeat, aes(x= Year, y= Amount, color= Entity))+
-  geom_line()+
-  scale_fill_viridis(discrete = TRUE) +
-  theme_minimal()
+ggplot(top_pigmeat, aes(x= Year, y= Production, color= Entity))+
+    geom_line()+
+    scale_fill_viridis(discrete = TRUE) +
+    ylab("Production (million tonnes)")+
+    theme_minimal()
 ```
 
 In the table \@ref(tab:cattle), we see the global production of cattle (beef and buffalo) meat. From the country's perspective, The United States is the world’s largest beef and buffalo meat producer. Other major producers are Brazil and China.
