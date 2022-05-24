@@ -81,7 +81,7 @@ production <- read.csv(here::here("Data/meat-production-tonnes.csv"))
 
 \subsection*{Analysis} 
 
-**Q1: How does global meat production develop from 1961 to 2018?**
+**Q1: How did global meat production develop by continents?**
 
 ```{r tidy-data, echo = FALSE, message = FALSE, warning = FALSE}
 
@@ -115,12 +115,29 @@ ggplot(df, aes(x = Year, y = meat_production, color = Entity))+
   theme_bw()
 ```  
 
-From Figure\@ref(fig:continent-figure), we can see we can see the global production was around 340 million tonnes in 2018. And all continents show an uptrend.
-In particular, Asia production increased from under 10 million tonnes to around 150 million tonnes, and produced more meat than Europe in 1992, and become the largest meat production continent. And Europe shows a fluctuating growth, while another continents show steady growth.
+From Figure\@ref(fig:continent-figure), we can see all continents show an uptrend. In particular, production in Asia has increased from around 10 million tonnes to around 150 million tonnes. And in 1992, Asia produced more than Europe and became the largest meat producer.
+
+```{r continent-table, echo = FALSE, message = FALSE, warning = FALSE}
+increase <- df %>%
+  filter(Year == 2018 | Year == 1961) %>%
+  select(Entity, Year, meat_production) %>%
+  pivot_wider(names_from = Year, values_from = meat_production) %>%
+  rename("Year2018" = "2018", "Year1961" = "1961" ) %>%
+  mutate(P1961 = round(Year1961*100/sum(Year1961), digits = 2)) %>%
+  mutate(P2018 = round(Year2018*100/sum(Year2018), digits = 2)) %>%
+  mutate(times = round((Year2018-Year1961)/Year1961, digits = 2)) 
+increase %>%
+  arrange(-P2018)%>%
+  knitr::kable(caption = "Comparison between 1961 and 2018") %>%
+  kable_styling()
+
+```
+
+See Table\@ref(tab:continent-table). In 2018, meat production in Asia has increased around 15 times, accounting for around 43% of total production, while the proportion of Europe and Northern America decreased, although their production increased.
 
 \clearpage
 
-**Q2:  How do the Top six countries of meat production develop from 1961 to 2018?**
+**Q2: How did the meat production develop in countries which contributed greatly?**
 
 ```{r tidy-data2, echo = FALSE, message = FALSE, warning = FALSE}
 
@@ -150,7 +167,32 @@ ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
   theme_bw()
 ```
 
-From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world at the same time. 
+From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world since 1990. 
+
+
+```{r country-table, echo = FALSE, message = FALSE, warning = FALSE}
+increase2 <- production %>%
+  group_by(Entity) %>%
+  filter(Code != "" &
+        Code %in% c("CHN", "USA", "BRA", "DEU", "FRA", "ARG" ,"OWID_WRL"))%>%
+  filter(Year == 2018 | Year == 1961) %>%
+  select(Entity, Year, meat_production) %>%
+  pivot_wider(names_from = Year, values_from = meat_production) %>%
+  rename("Year2018" = "2018", "Year1961" = "1961" ) %>%
+  mutate(P1961 = round(Year1961*100/71.36, digits = 2)) %>%
+  mutate(P2018 = round(Year2018*100/342.42, digits = 2)) %>%
+  mutate(times = round((Year2018-Year1961)/Year1961, digits = 2)) 
+  
+
+increase2 %>%
+  arrange(-P2018)%>%
+  knitr::kable(caption = "Comparison between 1961 and 2018") %>%
+ kable_styling()
+
+```
+
+See Table\@ref(tab:country-table). In 2018, The world's meat production has increased around quadrupled. And China has increased about 34 times compared to 1961, accounting for about 26% of global meat production. And the meat production in United States accounted for about 14%, although the production only has doubled.
+
 
 \section*{Meat production by livestock type-- Guan Ru Chen}
 
