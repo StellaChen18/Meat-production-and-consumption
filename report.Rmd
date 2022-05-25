@@ -112,12 +112,16 @@ ggplot(df, aes(x = Year, y = meat_production, color = Entity))+
   scale_x_continuous(breaks = c(1961,1970,1980, 1990, 2000, 2010,2018))+
   scale_y_continuous(breaks = c(0, 10, 50, 100, 150))+
   ylab("livestock meat production (million tonnes)")+
-  theme_bw()
+  theme_bw()+
+  theme(axis.text = element_text(size = 13),
+        legend.text = element_text(size = 12))
 ```  
 
 From Figure\@ref(fig:continent-figure), we can see all continents show an uptrend. In particular, production in Asia has increased from around 10 million tonnes to around 150 million tonnes. And in 1992, Asia produced more than Europe and became the largest meat producer.
 
-```{r continent-table, echo = FALSE, message = FALSE, warning = FALSE}
+\clearpage
+
+```{r tiyddata2, echo = FALSE, message = FALSE, warning = FALSE}
 increase <- df %>%
   filter(Year == 2018 | Year == 1961) %>%
   select(Entity, Year, meat_production) %>%
@@ -126,20 +130,48 @@ increase <- df %>%
   mutate(P1961 = round(Year1961*100/sum(Year1961), digits = 2)) %>%
   mutate(P2018 = round(Year2018*100/sum(Year2018), digits = 2)) %>%
   mutate(times = round((Year2018-Year1961)/Year1961, digits = 2)) 
-increase %>%
-  arrange(-P2018)%>%
-  knitr::kable(caption = "Comparison between 1961 and 2018") %>%
-  kable_styling()
 
 ```
 
-See Table\@ref(tab:continent-table). In 2018, meat production in Asia has increased around 15 times, accounting for around 43% of total production, while the proportion of Europe and Northern America decreased, although their production increased.
+```{r continent-increase, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Comparision of meat production between 1961 and 2018"}
+increase_continent <- increase %>%
+  pivot_longer(cols = c(P1961,P2018), names_to = "PYear", values_to = "proportion") %>%
+  filter(Entity != "World") %>%
+  group_by(PYear) %>%
+  arrange(-times, proportion)
+
+p1 <- ggplot(increase_continent, aes(x = proportion, y = reorder(Entity, Year2018), fill = PYear))+
+  geom_col( position = "dodge")+
+  geom_text(data = increase_continent, aes(label = proportion), size = 4, position = position_dodge(width = 0.9))+
+  ylab("Entity")+
+  ggtitle("The proportion of the continent's meat production in 1961 and 2018")+
+  coord_flip()+
+  theme_bw()+
+  theme(axis.text.x = element_text(size = 11, angle = 15, hjust = 1),
+        axis.text.y = element_text(size = 11),
+        legend.text = element_text(size = 11))
+  
+
+p2 <- ggplot(increase, aes(x = reorder(Entity, Year2018), y = times))+
+  geom_col(fill = "green")+
+  geom_text(data = increase, aes(label = times), size = 4, color = "red")+
+  ggtitle("The multiples that meat production has increased")+
+  theme_bw()+
+  theme(axis.text.x = element_text(size = 11, angle = 15, hjust = 1),
+        axis.text.y = element_text(size = 11))+
+  xlab("Entity")
+
+grid.arrange(p1,p2, ncol = 1)
+  
+```
+
+See Figure\@ref(fig:continent-increase). In 2018, meat production in Asia has increased around 15 times, accounting for around 43% of total production, while the proportion of Europe and Northern America has decreased, although their production has increased.
 
 \clearpage
 
-**Q2: How did the meat production develop in countries which contributed greatly?**
+**Q2: How did the meat production develop in some countries which contributed greatly?**
 
-```{r tidy-data2, echo = FALSE, message = FALSE, warning = FALSE}
+```{r tidy-data3, echo = FALSE, message = FALSE, warning = FALSE}
 
 production <- production %>%
    rename("meat_production" = "Livestock.Primary...Meat..Total...1765...Production...5510...tonnes") %>%
@@ -164,13 +196,16 @@ ggplot(df2, aes(x = Year, y = meat_production, color = Entity))+
   scale_fill_brewer(palette = "Set3")+
   scale_x_continuous(breaks = c(1961,1970,1980, 1990, 2000, 2010,2018))+
   ylab("Top 6 countries of livestock meat production (million tonnes)")+
-  theme_bw()
+  theme_bw()+
+  theme(axis.text = element_text(size = 13),
+        legend.text = element_text(size = 12))
 ```
 
-From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990 and became the largest meat production country in the world since 1990. 
+From Figure\@ref(fig:country), it is obvious that China meat production has increased sharply. And China surpassed the United States in 1990, and has been the largest meat production country in the world since 1990. 
 
+\clearpage
 
-```{r country-table, echo = FALSE, message = FALSE, warning = FALSE}
+```{r tidydata4, echo = FALSE, message = FALSE, warning = FALSE}
 increase2 <- production %>%
   group_by(Entity) %>%
   filter(Code != "" &
@@ -182,17 +217,44 @@ increase2 <- production %>%
   mutate(P1961 = round(Year1961*100/71.36, digits = 2)) %>%
   mutate(P2018 = round(Year2018*100/342.42, digits = 2)) %>%
   mutate(times = round((Year2018-Year1961)/Year1961, digits = 2)) 
-  
-
-increase2 %>%
-  arrange(-P2018)%>%
-  knitr::kable(caption = "Comparison between 1961 and 2018") %>%
- kable_styling()
 
 ```
 
-See Table\@ref(tab:country-table). In 2018, The world's meat production has increased around quadrupled. And China has increased about 34 times compared to 1961, accounting for about 26% of global meat production. And the meat production in United States accounted for about 14%, although the production only has doubled.
+```{r country-increase, echo = FALSE, message = FALSE, warning = FALSE, fig.cap="Comparision of meat production between 1961 and 2018"}
+increase_country <- increase2 %>%
+  pivot_longer(cols = c(P1961,P2018), names_to = "PYear", values_to = "proportion") %>%
+  filter(Entity != "World") %>%
+  group_by(PYear) %>%
+  arrange(-times, proportion)
 
+p1 <- ggplot(increase_country, aes(x = proportion, y = reorder(Entity, Year2018), fill = PYear))+
+  geom_col( position = "dodge")+
+  geom_text(data = increase_country, aes(label = proportion), size = 4, position = position_dodge(width = 0.9))+
+  ylab("Entity")+
+  ggtitle("The proportion of the national meat production in 1961 and 2018")+
+  coord_flip()+
+  theme_bw()+
+  theme(axis.text = element_text(size = 12),
+        legend.text = element_text(size = 11))
+
+p2 <- ggplot(increase2, aes(x = times, y = reorder(Entity, Year2018)))+
+  geom_col(fill = "green")+
+  geom_text(data = increase2, aes(label = times), size = 4, color = "red")+
+  ylab("Entity")+
+  ggtitle("The multiples that meat production has increased")+
+  coord_flip()+
+  theme_bw()+
+  theme(axis.text = element_text(size = 12))
+
+grid.arrange(p1,p2, ncol = 1)
+  
+         
+  
+```
+
+See Figure\@ref(fig:country-increase). In 2018, The world's meat production has increased around quadrupled. And China has increased about 34 times compared to 1961, accounting for about 26% of global meat production. And the meat production in United States accounted for about 14%, although the production only has doubled.
+
+\clearpage
 
 \section*{Meat production by livestock type-- Guan Ru Chen}
 
