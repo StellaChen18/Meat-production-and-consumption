@@ -51,11 +51,9 @@ library(viridis)
 
 # Data set introduction
 
-Feeding the world in a sustainable way is one of our most pressing challenges in the coming decades. Meat plays a pivotal role in this.
+Meat is an important source of nutrition for many people around the world. Meat production and consumption greatly affect the sustainable development of the world.
 
-Meat is an important source of nutrition for many people around the world. Global demand for meat is growing: over the past 50 years, meat production has more than tripled. The world now produces more than 340 million tonnes each year.
-
-But the production of meat has large environmental impacts – increasing greenhouse gas emissions, agricultural land and freshwater use. One of the world’s most pressing challenges is to produce and consume meat, dairy and other protein products in a way that reduces its environmental impacts.
+With the continuous development of the global economy and the continuous improvement of people's living standards, the market has numerous demands for meat products, with more and more variety requirements and higher quality requirements. So that we could better understand the situation about the global meat production.
 
 The data set was obtained from the "Our World in Data" data base and contains the following variables regarding to meat production of the world:
  
@@ -67,6 +65,12 @@ The data set was obtained from the "Our World in Data" data base and contains th
 
 
 # Research questions
+- How did global meat production develop by continents?
+- How did the meat production develop in some countries which contributed greatly?
+- What's the production distribution of different livestock types across the world?
+- Which countries are main production country for different types of meat, such as: Beef and buffalo, pig and poultry? 
+- Which countries eat the most meat in the last 20 years?
+- What types of meat do people eat?
 
 \clearpage
 
@@ -541,7 +545,7 @@ ggplot(Meat_type,
 \clearpage
 
 # Conclusion
-- In 2018, production was around 340 million tonnes. And Asia and China have contributed greatly to global meat production.
+- In 2018, global meat production has increased around quadrupled, and Asia and China have contributed greatly to global meat production. 
 
 - The average person in the world consumed around 43 kilograms of meat in 2014. This ranges from over 100kg in the US and Australia to only 5kg in India.
 

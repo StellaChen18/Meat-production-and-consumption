@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.6)  25 MAY 2022 16:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.6)  25 MAY 2022 16:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1374,29 +1374,29 @@ Overfull \hbox (56.23262pt too wide) detected at line 309
 [1
 
 {c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Figures/WeChat Image_20220521114617.jpg>]
-LaTeX Font Info:    Trying to load font information for TS1+mdbch on input line 325.
+LaTeX Font Info:    Trying to load font information for TS1+mdbch on input line 323.
 (c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/ts1mdbch.fd
 File: ts1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for TS1/mdbch.
 )
 LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 325.
+(Font)              scaled to size 10.51207pt on input line 323.
 [2]
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 348.
+(Font)              scaled to size 10.51207pt on input line 362.
 <report_files/figure-latex/continent-figure-1.pdf, id=37, 578.16pt x 361.35pt>
 File: report_files/figure-latex/continent-figure-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/continent-figure-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/continent-figure-1.pdf  used on input line 352.
+Package pdftex.def Info: report_files/figure-latex/continent-figure-1.pdf  used on input line 366.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
-(Font)              scaled to size 10.51207pt on input line 353.
+(Font)              scaled to size 10.51207pt on input line 367.
 [3
 
  <./report_files/figure-latex/continent-figure-1.pdf>]
 <report_files/figure-latex/continent-increase-1.pdf, id=52, 578.16pt x 361.35pt>
 File: report_files/figure-latex/continent-increase-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/continent-increase-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/continent-increase-1.pdf  used on input line 362.
+Package pdftex.def Info: report_files/figure-latex/continent-increase-1.pdf  used on input line 376.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [4
 
@@ -1404,7 +1404,7 @@ Package pdftex.def Info: report_files/figure-latex/continent-increase-1.pdf  use
 <report_files/figure-latex/country-1.pdf, id=64, 578.16pt x 361.35pt>
 File: report_files/figure-latex/country-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/country-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/country-1.pdf  used on input line 374.
+Package pdftex.def Info: report_files/figure-latex/country-1.pdf  used on input line 388.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [5
 
@@ -1412,7 +1412,7 @@ Package pdftex.def Info: report_files/figure-latex/country-1.pdf  used on input 
 <report_files/figure-latex/country-increase-1.pdf, id=76, 578.16pt x 361.35pt>
 File: report_files/figure-latex/country-increase-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/country-increase-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/country-increase-1.pdf  used on input line 384.
+Package pdftex.def Info: report_files/figure-latex/country-increase-1.pdf  used on input line 398.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [6
 
@@ -1420,7 +1420,7 @@ Package pdftex.def Info: report_files/figure-latex/country-increase-1.pdf  used 
 <report_files/figure-latex/productiontype-1.pdf, id=88, 578.16pt x 361.35pt>
 File: report_files/figure-latex/productiontype-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/productiontype-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/productiontype-1.pdf  used on input line 410.
+Package pdftex.def Info: report_files/figure-latex/productiontype-1.pdf  used on input line 424.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [7
 
@@ -1428,12 +1428,12 @@ Package pdftex.def Info: report_files/figure-latex/productiontype-1.pdf  used on
 <report_files/figure-latex/cattle-1.pdf, id=103, 578.16pt x 361.35pt>
 File: report_files/figure-latex/cattle-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/cattle-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/cattle-1.pdf  used on input line 457.
+Package pdftex.def Info: report_files/figure-latex/cattle-1.pdf  used on input line 471.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 <report_files/figure-latex/poultry-1.pdf, id=104, 578.16pt x 361.35pt>
 File: report_files/figure-latex/poultry-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/poultry-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/poultry-1.pdf  used on input line 494.
+Package pdftex.def Info: report_files/figure-latex/poultry-1.pdf  used on input line 508.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [8
 
@@ -1441,7 +1441,7 @@ Package pdftex.def Info: report_files/figure-latex/poultry-1.pdf  used on input 
 <report_files/figure-latex/pig-1.pdf, id=115, 578.16pt x 361.35pt>
 File: report_files/figure-latex/pig-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/pig-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/pig-1.pdf  used on input line 531.
+Package pdftex.def Info: report_files/figure-latex/pig-1.pdf  used on input line 545.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [9 <./report_files/figure-latex/poultry-1.pdf>] [10 <./report_files/figure-latex/pig-1.pdf>] [11] [12
 
@@ -1449,7 +1449,7 @@ Package pdftex.def Info: report_files/figure-latex/pig-1.pdf  used on input line
 <report_files/figure-latex/highest-consumption-trend-1.pdf, id=151, 578.16pt x 361.35pt>
 File: report_files/figure-latex/highest-consumption-trend-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/highest-consumption-trend-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/highest-consumption-trend-1.pdf  used on input line 576.
+Package pdftex.def Info: report_files/figure-latex/highest-consumption-trend-1.pdf  used on input line 590.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [13
 
@@ -1457,17 +1457,17 @@ Package pdftex.def Info: report_files/figure-latex/highest-consumption-trend-1.p
 <report_files/figure-latex/Meat-type-1.pdf, id=164, 578.16pt x 361.35pt>
 File: report_files/figure-latex/Meat-type-1.pdf Graphic file (type pdf)
 <use report_files/figure-latex/Meat-type-1.pdf>
-Package pdftex.def Info: report_files/figure-latex/Meat-type-1.pdf  used on input line 588.
+Package pdftex.def Info: report_files/figure-latex/Meat-type-1.pdf  used on input line 602.
 (pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
 [14
 
  <./report_files/figure-latex/Meat-type-1.pdf>]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 9.24173pt on input line 628.
+(Font)              scaled to size 9.24173pt on input line 642.
 [15
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 629--629
+Underfull \hbox (badness 10000) in paragraph at lines 643--643
 [][]\T1/mdbch/m/n/10.95 (+20) Ritchie, H and M Roser (2017). Meat and Dairy Pro-duc-tion. \T1/mdbch/m/it/10.95 (+20) Our World in Data\T1/mdbch/m/n/10.95 (+20) .
  []
 
@@ -1480,14 +1480,14 @@ Package logreq Info: Writing requests to 'report.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  27680 strings out of 480260
- 489024 string characters out of 5892193
+ 489016 string characters out of 5892193
  1191260 words of memory out of 5000000
  44848 multiletter control sequences out of 15000+600000
  573634 words of font info for 283 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,14n,93p,1003b,1457s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo.enc}<c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fontawesome/FontAwesome.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsb8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsr8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr8t.pfb>
-Output written on report.pdf (16 pages, 307643 bytes).
+Output written on report.pdf (16 pages, 307688 bytes).
 PDF statistics:
  257 PDF objects out of 1000 (max. 8388607)
  200 compressed objects within 2 object streams
