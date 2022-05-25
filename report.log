@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.6)  25 MAY 2022 16:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.6)  25 MAY 2022 16:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1463,15 +1463,15 @@ Package pdftex.def Info: report_files/figure-latex/Meat-type-1.pdf  used on inpu
 
  <./report_files/figure-latex/Meat-type-1.pdf>]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 9.24173pt on input line 626.
+(Font)              scaled to size 9.24173pt on input line 628.
+[15
 
-Underfull \hbox (badness 10000) in paragraph at lines 627--627
+]
+Underfull \hbox (badness 10000) in paragraph at lines 629--629
 [][]\T1/mdbch/m/n/10.95 (+20) Ritchie, H and M Roser (2017). Meat and Dairy Pro-duc-tion. \T1/mdbch/m/it/10.95 (+20) Our World in Data\T1/mdbch/m/n/10.95 (+20) .
  []
 
-[15
-
-] [16] (./report.aux)
+[16] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 60C3C26200121C3BA175677DFCD84D6A;605.
 Package logreq Info: Writing requests to 'report.run.xml'.
@@ -1479,18 +1479,18 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27674 strings out of 480260
- 488862 string characters out of 5892193
- 1191203 words of memory out of 5000000
- 44843 multiletter control sequences out of 15000+600000
+ 27680 strings out of 480260
+ 489024 string characters out of 5892193
+ 1191260 words of memory out of 5000000
+ 44848 multiletter control sequences out of 15000+600000
  573634 words of font info for 283 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,14n,93p,1003b,1457s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}{c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo.enc}<c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fontawesome/FontAwesome.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsb8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsr8a.pfb><c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr8t.pfb>
-Output written on report.pdf (16 pages, 307014 bytes).
+Output written on report.pdf (16 pages, 307643 bytes).
 PDF statistics:
- 254 PDF objects out of 1000 (max. 8388607)
- 197 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
+ 257 PDF objects out of 1000 (max. 8388607)
+ 200 compressed objects within 2 object streams
+ 45 named destinations out of 1000 (max. 500000)
  82008 words of extra memory for PDF output out of 89155 (max. 10000000)
 

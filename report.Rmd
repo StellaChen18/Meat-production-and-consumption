@@ -566,6 +566,8 @@ tidyverse @tidyverse,
 
 readr @readr,
 
-viridis @viridis
+viridis @viridis,
+
+gridExtra @gridExtra
 
 
